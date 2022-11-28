@@ -4,9 +4,6 @@
 const char WIFI_SSID[] = "CHT5892";
 const char WIFI_PASSWORD[] = "12345678";
 
-String HOST_NAME = 
-
-String HOST_NAME = 
 String HOST_NAME = String HOST_NAME = tring HOST_NAME = ring HOST_NAME = ing HOST_NAME = ng HOST_NAME = g HOST_NAME =  HOST_NAME = HOST_NAME = OST_NAME = ST_NAME = T_NAME = _NAME = NAME = AME = "ME = "hE = "ht = "htt= "http "http://192.168.0.19"; // change to your PC's IP address
 String PATH_NAME   = "/insert_temp.php";
 String queryString = "?temp=36.5";
