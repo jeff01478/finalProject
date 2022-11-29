@@ -7,9 +7,9 @@
 
 Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 
-const char ssid[]     = "CHT5892";// change to your WIFI SSID
-const char password[] = "12345678";// change to your WIFI Password
-IPAddress server_addr(192,168,1,190);// change to you server ip, note its form split by "," not "."
+const char ssid[]     = "LiZhengHao";// change to your WIFI SSID
+const char password[] = "qwertyuiop123";// change to your WIFI Password
+IPAddress server_addr(172,20,10,2);// change to you server ip, note its form split by "," not "."
 int MYSQLPort =3306;   //mysql port default is 3306
 char user[] = "a108510358";// Your MySQL user login username(default is root),and note to change MYSQL user root can access from local to internet(%)
 char pass[] = "10385267";// Your MYSQL password
@@ -91,7 +91,6 @@ void loop() {
   MySQL_Cursor *cur_mem = new MySQL_Cursor(&conn);  
   cur_mem->execute(INSERT_SQL.c_str());//execute SQL
   delete cur_mem;
-  conn.close();                  // close the connection
   Serial.println("Data Saved.");
   delay(5000);
 }
