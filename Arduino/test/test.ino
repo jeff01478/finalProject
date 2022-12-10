@@ -3,7 +3,6 @@
 #include <MySQL_Cursor.h>
 #include <Wire.h>
 #include <Adafruit_MLX90614.h>
-#include "time.h"
 
 Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 
@@ -13,22 +12,12 @@ IPAddress server_addr(172,20,10,2);// change to you server ip, note its form spl
 int MYSQLPort =3306;   //mysql port default is 3306
 char user[] = "a108510358";// Your MySQL user login username(default is root),and note to change MYSQL user root can access from local to internet(%)
 char pass[] = "10385267";// Your MYSQL password
-const char* ntpServer = "pool.ntp.org";
-const long  gmtOffset_sec = 28800;
-const int   daylightOffset_sec = 3600;
 #define BUTTONPIN 23
 float temper = 0;
 
 WiFiClient client;            
 MySQL_Connection conn((Client *)&client);
 
-void printLocalTime(){
-  struct tm timeinfo;
-  if(!getLocalTime(&timeinfo)){
-    Serial.println("Failed to obtain time");
-    return;
-  }
-}
 void setup() {
   pinMode(BUTTONPIN, INPUT);
   Serial.begin(115200);
@@ -54,10 +43,6 @@ void setup() {
   Serial.println("WiFi connected");  
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
-
-  // Init and get the time
-  configTime(gmtOffset_sec, daylightOffset_sec, ntpServer);
-  printLocalTime();
   
   //try to connect to mysql server
   if (conn.connect(server_addr, 3306, user, pass)) {
@@ -79,15 +64,9 @@ void loop() {
     delay(2500);
     button = digitalRead(BUTTONPIN);
   }
-  printLocalTime();
-  char temptime[3];
-  struct tm timeinfo;
-  printLocalTime();
-  strftime(temptime,3, "%A, %B %d %Y %H:%M:%S",&timeinfo);
-  Serial.println(temptime);
-  String A = String(temptime);
+  
   //insert, change database name and values by string and char[]
-  String INSERT_SQL = "INSERT INTO test.member (member,temp,time) VALUES ('John','" + String(temper) + "','" + A + "')";//傳入的值
+  String INSERT_SQL = "INSERT INTO test.member (member,temp) VALUES ('John','" + String(temper) + "')";//傳入的值
   MySQL_Cursor *cur_mem = new MySQL_Cursor(&conn);  
   cur_mem->execute(INSERT_SQL.c_str());//execute SQL
   delete cur_mem;
