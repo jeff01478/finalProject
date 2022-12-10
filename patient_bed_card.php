@@ -178,13 +178,13 @@
 <p></p>
 <div style="position:relative; width: 1400px;0px; height: 830px; border:5px rgb(52, 183, 220) solid;padding: 20px; margin: 0 auto;">
         <div id="bed">房號:<?php echo $ward_no;?><br>床號：<?php echo $bed_no;?></div>
-        <div class="locate"><p1>旗山醫院</p1><p2><iframe href="#" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=small&timezone=Asia%2FTaipei" width="100%" height="90" frameborder="0" seamless></iframe> </p2></div>
-        <div style="margin: 20px;font-size: 30px; font-weight:bold;">病歷號：<?php echo $chart_no;?></div>
+        <div class="locate"><p1>旗山長照</p1><p2><iframe href="#" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=small&timezone=Asia%2FTaipei" width="100%" height="90" frameborder="0" seamless></iframe> </p2></div>
+        <div style="margin: 20px;font-size: 30px; font-weight:bold;">編號：<?php echo $chart_no;?></div>
         <div class="info1"><p1><?php echo $name?></p1><p2>性別：<?php echo $gender;?><br>年齡：80y2m<br>血型：<?php echo $blood;?></p2></div>
         <div class="info2">
-            主治醫師：<?php echo $physician;?><br>
-            主護護理師：<?php echo $nurse;?><br>
-            住院時間：<?php echo $date;?>
+            <!--主治醫師：<?php echo $physician;?><br>-->
+            負責照護人員：<?php echo $nurse;?><br>
+            入住時間：<?php echo $date;?>
         </div>
         <!-- QRcode產生 -->
         <div id="qrcode" style="float:right; position: absolute; bottom: 50px; right: 100px;">
