@@ -1,15 +1,7 @@
 <?php
   session_start();
-  try {
-    $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
-    $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE name='".$_SESSION['name']."'");
-    $stmt-> execute();
-    $nurse = $stmt->fetchAll()[0][0]; //護理師
-    $stmt = $conn->prepare("SELECT * FROM body_data WHERE name='".$_SESSION['name']."'");
-    $stmt->execute();
-    $result = $stmt->fetchAll();
-  } catch (PDOException $e) {
-    echo "資料庫連結失敗! 錯誤訊息為 " . $e->getMessage();
+  if ($_SESSION["login"] == 0) {
+    echo "<script> {location.href='login.html'} </script>";
   }
 ?>
 

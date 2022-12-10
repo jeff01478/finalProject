@@ -3,43 +3,44 @@
     if ($_SESSION["login"] == 0) {
     echo "<script> {location.href='login.html'} </script>";
     }
-    if(isset($_GET['patient'])){ //避免醫護端與病人端衝突，需做區分
-        $name = $_GET['patient'];
-    }
-    else{
-        $name = $_SESSION['name'];
+    if(isset($_GET['p_id_number'])){ //避免醫護端與病人端衝突，需做區分
+        $id_number = $_GET['p_id_number'];
     }
 
-    $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
-    $stmt = $conn ->prepare("SELECT ward_no FROM patient_admission_info WHERE name='".$name."'");
+    $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
+    $stmt = $conn ->prepare("SELECT ward_no FROM patient_admission_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $ward_no = $stmt->fetchAll()[0][0]; //房號
 
-    $stmt = $conn ->prepare("SELECT bed_no FROM patient_admission_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT bed_no FROM patient_admission_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $bed_no = $stmt->fetchAll()[0][0]; //床號
 
-    $stmt = $conn ->prepare("SELECT chart_no FROM patient_basic_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT m_name FROM patient_basic_info WHERE id_number='".$id_number."'");
+    $stmt-> execute();
+    $p_name = $stmt->fetchAll()[0][0]; //病患姓名
+
+    $stmt = $conn ->prepare("SELECT chart_no FROM patient_basic_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $chart_no = $stmt->fetchAll()[0][0]; //病例號
 
-    $stmt = $conn ->prepare("SELECT gender FROM patient_basic_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT gender FROM patient_basic_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $gender = $stmt->fetchAll()[0][0]; //性別
 
-    $stmt = $conn ->prepare("SELECT blood FROM patient_basic_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT blood FROM patient_basic_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $blood = $stmt->fetchAll()[0][0]; //血型
 
-    $stmt = $conn ->prepare("SELECT attending_physician FROM patient_admission_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT attending_physician FROM patient_admission_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $physician = $stmt->fetchAll()[0][0]; //醫師
 
-    $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $nurse = $stmt->fetchAll()[0][0]; //護理師
 
-    $stmt = $conn ->prepare("SELECT hospitalization_date FROM patient_admission_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT hospitalization_date FROM patient_admission_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $date = $stmt->fetchAll()[0][0]; //入院時間
     
@@ -181,7 +182,7 @@
         <div id="bed">房號:<?php echo $ward_no;?><br>床號：<?php echo $bed_no;?></div>
         <div class="locate"><p1>旗山醫院</p1><p2><iframe href="#" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=small&timezone=Asia%2FTaipei" width="100%" height="90" frameborder="0" seamless></iframe> </p2></div>
         <div style="margin: 20px;font-size: 30px; font-weight:bold;">病歷號：<?php echo $chart_no;?></div>
-        <div class="info1"><p1><?php echo $name = $_GET['patient']?></p1><p2>性別：<?php echo $gender;?><br>年齡：80y2m<br>血型：<?php echo $blood;?></p2></div>
+        <div class="info1"><p1><?php echo $p_name?></p1><p2>性別：<?php echo $gender;?><br>年齡：80y2m<br>血型：<?php echo $blood;?></p2></div>
         <div class="info2">
             主治醫師：<?php echo $physician;?><br>
             主護護理師：<?php echo $nurse;?><br>

@@ -3,7 +3,8 @@
     $content = NULL;
     $date = NULL;
     $remark = NULL;
-    $name = $_SESSION['patient'];
+    $id_number = $_SESSION['p_id_number'];
+    //$name = $_SESSION['patient'];
 
     if(isset($_POST['Product_1'])){
         $content .= $_POST['Product_1']."<br>";
@@ -30,8 +31,11 @@
         }
     
         try{
-            $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
-            $stmt = $conn->prepare("INSERT INTO room_round_record(content, date, name, remark) VALUES ('".$content."','".$date."','".$name."','".$remark."')");
+            $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
+            $stmt = $conn->prepare("SELECT m_name FROM member where id_number = '".$_SESSION['p_id_number']."'");
+            $stmt->execute();
+            $p_name = $stmt->fetchAll()[0][0];
+            $stmt = $conn->prepare("INSERT INTO room_round_record(id_number, content, m_date, m_name, remark) VALUES ('".$id_number."','".$content."','".$date."','".$p_name."','".$remark."')");
             $stmt->execute();
             echo "<script> {window.alert('資料儲存成功');location.href='nurse_ward_round.php'} </script>";
         }catch(PDOException $e){

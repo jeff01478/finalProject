@@ -1,7 +1,7 @@
 <?php
   session_start();
   try {
-    $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
+    $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
     // $stmt = $conn->prepare("SELECT * FROM bodydata");
     // $stmt->execute();
     // $result = $stmt->fetchAll();
@@ -194,11 +194,11 @@
         <th style="width: 25%;">備註</th>
       </tr>
       <?php
-        $stmt = $conn ->prepare("SELECT * FROM med_time WHERE name = '".$_SESSION['patient']."'");
+        $stmt = $conn ->prepare("SELECT * FROM med_time WHERE id_number = '".$_SESSION['p_id_number']."'");
         $stmt->execute();
         $result = $stmt->fetchAll();
         foreach ($result as $row) {
-          echo "<tr><td>" . $row['med'] . "</td><td>" . $row['date'] . "</td><td>" . $name . "</td><td>" . $row['remark'] . "</td></tr>";
+          echo "<tr><td>" . $row['med'] . "</td><td>" . $row['m_date'] . "</td><td>" . $name . "</td><td>" . $row['remark'] . "</td></tr>";
         }
       ?>
     </table>

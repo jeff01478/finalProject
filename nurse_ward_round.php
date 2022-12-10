@@ -1,8 +1,8 @@
 <?php
   session_start();
   try {
-    $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
-    $stmt = $conn->prepare("SELECT * FROM room_round_record WHERE name='".$_SESSION['patient']."'");
+    $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
+    $stmt = $conn->prepare("SELECT * FROM room_round_record WHERE id_number='".$_SESSION['p_id_number']."'");
     $stmt->execute();
     $result = $stmt->fetchAll();
   } catch (PDOException $e) {
@@ -194,7 +194,7 @@
     </tr>
     <?php
     foreach ($result as $row) {
-      echo "<tr><td>" . $row['content'] . "</td><td>" . $row['date'] . "</td><td>".$name."</td><td>" . $row['remark'] . "</td></tr>";
+      echo "<tr><td>" . $row['content'] . "</td><td>" . $row['m_date'] . "</td><td>".$name."</td><td>" . $row['remark'] . "</td></tr>";
     }
     ?>
     </table>

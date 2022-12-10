@@ -1,8 +1,8 @@
 <?php
 session_start();
-//if ($_SESSION["login"] == 0) {
-//    echo "<script> {location.href='login.html'} </script>";
-//}
+if ($_SESSION["login"] == 0) {
+    echo "<script> {location.href='login.html'} </script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -128,8 +128,8 @@ session_start();
                     </td>
                     <?php
                     try {
-                        $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
-                        $stmt = $conn->prepare("SELECT * FROM patient_basic_info where name = '".$_SESSION['patient']."'");
+                        $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
+                        $stmt = $conn->prepare("SELECT * FROM patient_basic_info where id_number = '".$_SESSION['p_id_number']."'");
                         $stmt->execute();
                         $row = $stmt->fetch();
                     } catch (PDOException $e) {
@@ -141,7 +141,7 @@ session_start();
                     );
 
                     $j = 0;
-                    for ($i = 1; $i < count($basic) * 2; $i += 2) {
+                    for ($i = 0; $i < count($basic) * 2; $i += 2) {
                         echo "<td>" . $basic[$j] . "</td><td>" . $row[$i] . "</td><td>" . $row[$i + 1] . "</td></tr><tr>";
                         $j += 1;
                     }
@@ -165,7 +165,7 @@ session_start();
                         </td>
                         <?php
                             try {
-                                $stmt = $conn->prepare("SELECT * FROM patient_admission_info where name = '".$_SESSION['patient']."'");
+                                $stmt = $conn->prepare("SELECT * FROM patient_admission_info where id_number= '".$_SESSION['p_id_number']."'");
                                 $stmt->execute();
                                 $row = $stmt->fetch();
                             } catch (PDOException $e) {

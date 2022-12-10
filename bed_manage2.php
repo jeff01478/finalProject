@@ -1,11 +1,11 @@
 <?php
     session_start();
-    $_SESSION['patient'] = NULL;
-    if(isset($_GET['patient'])){
-      $_SESSION['patient'] = $_GET['patient'];
+    $_SESSION['p_id_number'] = NULL;
+    if(isset($_GET['p_id_number'])){
+      $_SESSION['p_id_number'] = $_GET['p_id_number'];
     }
     
-    if($_SESSION['patient'] == NULL){
+    if($_SESSION['p_id_number'] == NULL){
         echo "<script> {window.alert('無病患資料');location.href='nurse_bed_manage.php'} </script>";
     }
     else{
