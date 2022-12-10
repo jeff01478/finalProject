@@ -10,36 +10,36 @@
         $name = $_SESSION['name'];
     }
 
-    $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
-    $stmt = $conn ->prepare("SELECT ward_no FROM patient_admission_info WHERE name='".$name."'");
+    $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
+    $stmt = $conn ->prepare("SELECT ward_no FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
     $stmt-> execute();
     $ward_no = $stmt->fetchAll()[0][0]; //房號
 
-    $stmt = $conn ->prepare("SELECT bed_no FROM patient_admission_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT bed_no FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
     $stmt-> execute();
     $bed_no = $stmt->fetchAll()[0][0]; //床號
 
-    $stmt = $conn ->prepare("SELECT chart_no FROM patient_basic_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT chart_no FROM patient_basic_info WHERE id_number='".$_SESSION['id_number']."'");
     $stmt-> execute();
     $chart_no = $stmt->fetchAll()[0][0]; //病例號
 
-    $stmt = $conn ->prepare("SELECT gender FROM patient_basic_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT gender FROM patient_basic_info WHERE id_number='".$_SESSION['id_number']."'");
     $stmt-> execute();
     $gender = $stmt->fetchAll()[0][0]; //性別
 
-    $stmt = $conn ->prepare("SELECT blood FROM patient_basic_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT blood FROM patient_basic_info WHERE id_number='".$_SESSION['id_number']."'");
     $stmt-> execute();
     $blood = $stmt->fetchAll()[0][0]; //血型
 
-    $stmt = $conn ->prepare("SELECT attending_physician FROM patient_admission_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT attending_physician FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
     $stmt-> execute();
     $physician = $stmt->fetchAll()[0][0]; //醫師
 
-    $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
     $stmt-> execute();
     $nurse = $stmt->fetchAll()[0][0]; //護理師
 
-    $stmt = $conn ->prepare("SELECT hospitalization_date FROM patient_admission_info WHERE name='".$name."'");
+    $stmt = $conn ->prepare("SELECT hospitalization_date FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
     $stmt-> execute();
     $date = $stmt->fetchAll()[0][0]; //入院時間
     

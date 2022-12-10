@@ -3,7 +3,7 @@
   if ($_SESSION["login"] == 0) {
     echo "<script> {location.href='login.html'} </script>";
   }
-  $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
+  $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
 ?>
 
 <!-- 還需要一個判斷是否有選擇病人，沒有的話要回到nurse_index.php -->
@@ -95,7 +95,7 @@
         <!-- 等你們改 -->
         <p id="info">房號：
         <?php 
-          $stmt = $conn ->prepare("SELECT ward_no FROM patient_admission_info WHERE name='".$_SESSION['name']."'");
+          $stmt = $conn ->prepare("SELECT ward_no FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
           $stmt-> execute();
           $result =  $stmt->fetchAll()[0][0];
           echo $result;
@@ -104,7 +104,7 @@
         <!-- 等你們改 -->
         <p id="info">床號：
         <?php 
-          $stmt = $conn ->prepare("SELECT bed_no FROM patient_admission_info WHERE name='".$_SESSION['name']."'");
+          $stmt = $conn ->prepare("SELECT bed_no FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
           $stmt-> execute();
           $result =  $stmt->fetchAll()[0][0];
           echo $result; 
@@ -113,7 +113,7 @@
         <!-- 等你們改 -->
         <p id="info">主治醫師：
         <?php 
-          $stmt = $conn ->prepare("SELECT attending_physician FROM patient_admission_info WHERE name='".$_SESSION['name']."'");
+          $stmt = $conn ->prepare("SELECT attending_physician FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
           $stmt-> execute();
           $result =  $stmt->fetchAll()[0][0];
           echo $result; 
@@ -122,7 +122,7 @@
         <!-- 等你們改 -->
         <p id="info">主護護理師：
         <?php 
-          $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE name='".$_SESSION['name']."'");
+          $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
           $stmt-> execute();
           $result =  $stmt->fetchAll()[0][0];
           echo $result; 

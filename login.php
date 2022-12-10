@@ -25,7 +25,7 @@
 <?php
     //登入認證
     try {
-        $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
+        $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
         $stmt = $conn ->prepare("SELECT * FROM member WHERE userid=? AND password=?");
         $stmt-> execute([  $_POST['account'], $_POST['password']  ]);
         $result =  $stmt->fetchAll();   
@@ -33,7 +33,10 @@
             session_start();
             $_SESSION["login"] = 1;
             $_SESSION["account"] = $_POST["account"];
-            $stmt = $conn ->prepare("SELECT name FROM member where userid = '".$_POST['account']."'"); //讀取登入帳號的name
+            $stmt = $conn ->prepare("SELECT id_number FROM member where userid = '".$_POST['account']."'"); //讀取登入帳號的身分號
+            $stmt-> execute();
+            $_SESSION["id_number"] = $stmt->fetchAll()[0][0];
+            $stmt = $conn ->prepare("SELECT m_name FROM member where userid = '".$_POST['account']."'"); //讀取登入帳號的name
             $stmt-> execute();
             $_SESSION["name"] = $stmt->fetchAll()[0][0];
             $stmt = $conn ->prepare("SELECT identity FROM member where userid = '".$_POST['account']."'"); //讀取登入帳號的identity
@@ -42,7 +45,7 @@
             $stmt = $conn ->prepare("SELECT permission FROM member where userid = '".$_POST['account']."'"); //讀取登入帳號的權限
             $stmt-> execute();
             $result =  $stmt->fetchAll()[0][0];
-            $stmt = $conn ->prepare("SELECT text FROM data_change_text where id = 1"); //讀取異動資訊
+            $stmt = $conn ->prepare("SELECT record FROM data_change_text where id = 1"); //讀取異動資訊
             $stmt-> execute();
             $_SESSION['data_change_text'] =  $stmt->fetchAll()[0][0]; 
             switch($result){

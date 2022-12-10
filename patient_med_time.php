@@ -1,11 +1,11 @@
 <?php
 session_start();
 try {
-  $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
-  $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE name='".$_SESSION['name']."'");
+  $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
+  $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
   $stmt-> execute();
   $nurse = $stmt->fetchAll()[0][0]; //護理師
-  $stmt = $conn->prepare("SELECT * FROM med_time WHERE name='".$_SESSION['name']."'");
+  $stmt = $conn->prepare("SELECT * FROM med_time WHERE id_number='".$_SESSION['id_number']."'");
   $stmt->execute();
   $result = $stmt->fetchAll();
 } catch (PDOException $e) {
@@ -127,7 +127,7 @@ try {
       </tr>
       <?php
       foreach ($result as $row) {
-        echo "<tr><td>" . $row['med'] . "</td><td>" . $row['date'] . "</td><td>" . $nurse . "</td><td>" . $row['remark'] . "</td></tr>";
+        echo "<tr><td>" . $row['med'] . "</td><td>" . $row['m_date'] . "</td><td>" . $nurse . "</td><td>" . $row['remark'] . "</td></tr>";
       }
       ?>
     </table>

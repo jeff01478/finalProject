@@ -85,14 +85,14 @@ if ($_SESSION["login"] == 0) {
         <p id="subtitle">負責病人</p>
         <?php
           try {
-            $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
-            $stmt = $conn ->prepare("SELECT * FROM responsible_nurse WHERE name = '".$_SESSION['name']."'");
+            $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
+            $stmt = $conn ->prepare("SELECT * FROM responsible_nurse WHERE id_number = '".$_SESSION['id_number']."'");
             $stmt->execute();
             $result = $stmt->fetchAll();
-            echo '<a id="info" href="nurse_main.php?patient='.$result[0]['p1'].'">'.$result[0]['p1'].'</a><br>
-                  <a id="info" href="nurse_main.php?patient='.$result[0]['p2'].'">'.$result[0]['p2'].'</a><br>
-                  <a id="info" href="nurse_main.php?patient='.$result[0]['p3'].'">'.$result[0]['p3'].'</a><br>
-                  <a id="info" href="nurse_main.php?patient='.$result[0]['p4'].'">'.$result[0]['p4'].'</a><br>';
+            echo '<a id="info" href="nurse_main.php?p_id_number='.$result[0]['p1_id_number'].'">'.$result[0]['p1'].'</a><br>
+                  <a id="info" href="nurse_main.php?p_id_number='.$result[0]['p2_id_number'].'">'.$result[0]['p2'].'</a><br>
+                  <a id="info" href="nurse_main.php?p_id_number='.$result[0]['p3_id_number'].'">'.$result[0]['p3'].'</a><br>
+                  <a id="info" href="nurse_main.php?p_id_number='.$result[0]['p4_id_number'].'">'.$result[0]['p4'].'</a><br>';
           }catch(PDOException $e ){
               echo "資料庫連結失敗! 錯誤訊息為 " . $e->getMessage();
           }

@@ -3,7 +3,7 @@
     if($_SESSION["login"] == 0){
         echo "<script> {location.href='login.html'} </script>";
     }
-    $conn = new PDO("mysql:host=localhost;dbname=bed_information_system", "root", "");
+    $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
 ?>
 
 <!DOCTYPE html>
@@ -151,9 +151,9 @@
                         echo "
                         <div class='col-xs-6 col-md-3' style='margin:12px auto;width:180px;height:210px;'>
                             <div style='position: relative;width:180px;height:210px;'>
-                                <input class='".$color."' type='button' onclick=".'"'."javascript:location.href='bed_manage2.php?patient=".$row['name']."'".'"'.">
+                                <input class='".$color."' type='button' onclick=".'"'."javascript:location.href='bed_manage2.php?p_id_number=".$row['id_number']."'".'"'.">
             
-                                <div class='bed'>".$row['name']."<br> 床號：".$row['bed_no']."<br>狀態：".$row['p_condition']."</div>
+                                <div class='bed'>".$row['m_name']."<br> 床號：".$row['bed_no']."<br>狀態：".$row['p_condition']."</div>
                             </div>
                         </div>";
                         break;
@@ -188,9 +188,9 @@
                         echo "
                         <div class='col-xs-6 col-md-3' style='margin:12px auto;width:180px;height:210px;'>
                             <div style='position: relative;width:180px;height:210px;'>
-                                <input class='".$color."' type='button' onclick=".'"'."javascript:location.href='bed_manage2.php?patient=".$row['name']."'".'"'.">
+                                <input class='".$color."' type='button' onclick=".'"'."javascript:location.href='bed_manage2.php?p_id_number=".$row['id_number']."'".'"'.">
             
-                                <div class='bed'>".$row['name']."<br> 床號：".$row['bed_no']."<br>狀態：".$row['p_condition']."</div>
+                                <div class='bed'>".$row['m_name']."<br> 床號：".$row['bed_no']."<br>狀態：".$row['p_condition']."</div>
                             </div>
                         </div>";
                         break;  

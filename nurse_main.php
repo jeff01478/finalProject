@@ -4,9 +4,9 @@
     echo "<script> {location.href='login.html'} </script>";
   }*/
   session_start();
-  $_SESSION['patient'] = NULL;
-  if(isset($_GET['patient'])){
-    $_SESSION['patient'] = $_GET['patient'];
+  $_SESSION['p_id_number'] = NULL;
+  if(isset($_GET['p_id_number'])){
+    $_SESSION['p_id_number'] = $_GET['p_id_number'];
   }
 
 ?>
@@ -114,7 +114,7 @@
         <a id="info" href="nurse_ward_round.php">查房時間</a>
 
         <p id="subtitle">About病床</p>
-        <a id="info" href="nurse_bed_card.php?patient=<?php echo $_SESSION['patient'];?>">病床卡管理</a><br>
+        <a id="info" href="nurse_bed_card.php?p_id_number=<?php echo $_SESSION['p_id_number'];?>">病床卡管理</a><br>
         <a id="info" href="nurse_bed_manage.php">床位管理</a>
       </div>
     </div>
