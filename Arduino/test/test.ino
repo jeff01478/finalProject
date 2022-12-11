@@ -8,11 +8,11 @@ Adafruit_MLX90614 mlx = Adafruit_MLX90614();
 
 const char ssid[]     = "LiZhengHao";// change to your WIFI SSID
 const char password[] = "qwertyuiop123";// change to your WIFI Password
-IPAddress server_addr(172,20,10,14);// change to you server ip, note its form split by "," not "."
+IPAddress server_addr(172,20,10,2);// change to you server ip, note its form split by "," not "."
 int MYSQLPort =3306;   //mysql port default is 3306
-char user[] = "jeff01478";// Your MySQL user login username(default is root),and note to change MYSQL user root can access from local to internet(%)
-char pass[] = "123456";// Your MYSQL password
-#define BUTTONPIN 5
+char user[] = "a108510358";// Your MySQL user login username(default is root),and note to change MYSQL user root can access from local to internet(%)
+char pass[] = "10385267";// Your MYSQL password
+#define BUTTONPIN 23
 float temper = 0;
 
 WiFiClient client;            
@@ -44,11 +44,6 @@ void setup() {
   Serial.println("IP address: ");
   Serial.println(WiFi.localIP());
   
-  
-  delay(2000);  
-}
-
-void loop() {
   //try to connect to mysql server
   if (conn.connect(server_addr, 3306, user, pass)) {
      delay(1000);
@@ -56,6 +51,10 @@ void loop() {
   else{
     Serial.println("Connection failed.");
   }
+  delay(2000);  
+}
+
+void loop() {
   int button = digitalRead(BUTTONPIN);
   while(button == LOW){
     Serial.print("溫度 = ");
@@ -67,13 +66,13 @@ void loop() {
   }
   
   //insert, change database name and values by string and char[]
-  delay(1000);
-  String INSERT_SQL = "INSERT INTO access_test.esp_test (member,temp) VALUES ('John','" + String(temper) + "')";//傳入的值
-  MySQL_Cursor *cur_mem = new MySQL_Cursor(&conn);  
-  cur_mem->execute(INSERT_SQL.c_str());//execute SQL
-  delete cur_mem;
-  Serial.println("Data Saved.");
-  conn.close();
-  delay(5000);
-  button = digitalRead(BUTTONPIN);
+  if(String(temper) != "nan"){
+    String INSERT_SQL = "INSERT INTO access_test.esp_test (member,temp) VALUES ('John','" + String(temper) + "')";//傳入的值
+    MySQL_Cursor *cur_mem = new MySQL_Cursor(&conn);  
+    cur_mem->execute(INSERT_SQL.c_str());//execute SQL
+    delete cur_mem;
+    Serial.println("Data Saved.");
+    delay(5000);
+  }
+  delay(2000);
 }

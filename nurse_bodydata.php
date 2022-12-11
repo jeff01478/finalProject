@@ -172,6 +172,7 @@ try {
     </table>
     <p></p>
           <input type="submit" value="提交" style="float:right">
+          <input type="button" onclick="location.href='nurse_bodydata3.php'" value="硬體測量" style="float:right">
     </div>
     </form>
   <h1 style="margin: 10px 50px;">歷史紀錄</h1>
