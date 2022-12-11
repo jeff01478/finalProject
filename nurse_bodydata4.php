@@ -1,4 +1,5 @@
 <?php
+    echo "請開始測量體溫";
     $date = NULL;
     if(isset($_POST['date'])){
         $date = $_POST['date'];
