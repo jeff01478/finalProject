@@ -43,4 +43,9 @@
         echo "資料庫連結失敗! 錯誤訊息為 " . $e->getMessage();
     }
     echo "<script> {window.alert('已完成測量');location.href='nurse_bodydata.php'} </script>";
+<<<<<<< HEAD
 ?>
+=======
+?>
+
+>>>>>>> 96dbe445891921ac764943d82f7a1e89001e75f3
