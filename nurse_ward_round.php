@@ -84,7 +84,7 @@
       </li>
       <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    病人資本資料
+                    對象基本資料
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="nurse_info.php">基本資料</a>
@@ -122,7 +122,7 @@
       <tr>
         <th style="width: 25%;">內容</th>
         <th style="width: 25%;">日期時間</th>
-        <th style="width: 25%;">護理師</th>
+        <th style="width: 25%;">照服員</th>
         <th style="width: 25%;">備註</th>
       </tr>
       <tr>
@@ -188,7 +188,7 @@
       <tr>
         <th style="width: 25%;">內容</th>
         <th style="width: 25%;">日期時間</th>
-        <th style="width: 25%;">護理師</th>
+        <th style="width: 25%;">照服員</th>
         <th style="width: 25%;">備註</th>
       </tr>
     </tr>

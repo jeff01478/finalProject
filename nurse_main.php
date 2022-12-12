@@ -17,7 +17,7 @@
 <html lang="en">
 
 <head>
-  <title>醫護首頁</title>
+  <title>照護首頁</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -58,7 +58,7 @@
       </li>
       <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    病人資本資料
+                    對象基本資料
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="nurse_info.php">基本資料</a>
@@ -90,11 +90,11 @@
     
   </nav>
 
-  <h1 class="container">醫護首頁</h1>
+  <h1 class="container">照護首頁</h1>
   <div class="container">
     <div class="row" style="margin:auto; border: 3px solid black;  border-radius: 10px; ">
       <div class="col-xs-12 col-md-4" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">
-        <p id="subtitle">醫護基本資料</p>
+        <p id="subtitle">照護基本資料</p>
 
         <p id="info">身分別：<?php echo $identity /*匯入資料庫身分別*/; ?> </p>
         <!-- 等你們改 -->
@@ -107,13 +107,13 @@
         <p></p> <!-- 這邊需要資料庫 -->
       </div>
       <div class="col-xs-12 col-md-3" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">
-        <p id="subtitle">About病人</p>
-        <a id="info" href="nurse_info.php">病人基本資料</a><br>
+        <p id="subtitle">About對象</p>
+        <a id="info" href="nurse_info.php">對象基本資料</a><br>
         <a id="info" href="nurse_bodydata.php">身體數據</a><br>
         <a id="info" href="nurse_med_time.php">用藥時間</a><br>
         <a id="info" href="nurse_ward_round.php">查房時間</a>
 
-        <p id="subtitle">About病床</p>
+        <p id="subtitle">About床位</p>
         <a id="info" href="nurse_bed_card.php?p_id_number=<?php echo $_SESSION['p_id_number'];?>">病床卡管理</a><br>
         <a id="info" href="nurse_bed_manage.php">床位管理</a>
       </div>

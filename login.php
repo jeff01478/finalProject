@@ -19,7 +19,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>醫護登入</title>
+    <title>照護登入</title>
 </head>
 <body>
 <?php
@@ -49,10 +49,10 @@
             $stmt-> execute();
             $_SESSION['data_change_text'] =  $stmt->fetchAll()[0][0]; 
             switch($result){
-                case 1: //登入帳號為護理師
+                case 1: //登入帳號為護理師(照服員)
                     $_SESSION["permission"] = 1;
                     echo "<script> {window.alert('登入成功');location.href='nurse_index.php'} </script>";break; 
-                case 2: //登入帳號為病人
+                case 2: //登入帳號為病人(對象)
                     $_SESSION["permission"] = 2;
                     echo "<script> {window.alert('登入成功');location.href='patient_main.php'} </script>";break;
             }

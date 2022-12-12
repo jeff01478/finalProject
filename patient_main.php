@@ -56,7 +56,7 @@
           <!-- Dropdown -->
           <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                  病人資本資料
+                  對象基本資料
               </a>
               <div class="dropdown-menu">
                   <a class="dropdown-item" href="patient_info.php">基本資料</a>
@@ -136,12 +136,12 @@
         <p></p> <!-- 這邊需要資料庫 -->
       </div>
       <div class="col-xs-12 col-md-3" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">
-        <p id="subtitle">About病人</p>
-        <a id="info" href="patient_info.php">病人基本資料</a><br>
+        <p id="subtitle">About對象</p>
+        <a id="info" href="patient_info.php">對象基本資料</a><br>
         <a id="info" href="patient_bodydata.php">身體數據</a><br>
         <a id="info" href="patient_med_time.php">用藥時間</a>
 
-        <p id="subtitle">About病床</p>
+        <p id="subtitle">About床位</p>
         <a id="info" href="patient_bed_card.php">檢視病床卡</a><br>
       </div>
     </div>

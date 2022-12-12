@@ -9,7 +9,7 @@ if ($_SESSION["login"] == 0) {
 <html lang="en">
 
 <head>
-  <title>醫護首頁</title>
+  <title>照護首頁</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -48,6 +48,9 @@ if ($_SESSION["login"] == 0) {
       <li class="nav-item">
         <a class="nav-link" href="nurse_bed_manage.php">床位管理</a>
       </li>
+      <!--<li class="nav-item">
+        <a class="nav-link" href="calender.php">行事曆</a>
+      </li>-->
     </ul>
 
     <div style="margin-right:10px ;text-align:right; color:white;" class="col-xs-12 col-md-2">
@@ -62,11 +65,11 @@ if ($_SESSION["login"] == 0) {
     </form>
   </nav>
 
-  <h1 class="container">醫護首頁</h1>
+  <h1 class="container">照護首頁</h1>
   <div class="container">
     <div class="row" style="margin:auto; border: 3px solid black;  border-radius: 10px; ">
       <div class="col-xs-12 col-md-4" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">
-        <p id="subtitle">醫護基本資料</p>
+        <p id="subtitle">照護基本資料</p>
 
         <p id="info">身分別：
           <?php
@@ -82,7 +85,7 @@ if ($_SESSION["login"] == 0) {
         </p>
         <!-- 等你們改 -->
 
-        <p id="subtitle">負責病人</p>
+        <p id="subtitle">負責對象</p>
         <?php
           try {
             $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
@@ -107,11 +110,11 @@ if ($_SESSION["login"] == 0) {
         <p></p> <!-- 這邊需要資料庫 -->
       </div>
       <div class="col-xs-12 col-md-3" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">
-        <p id="subtitle">About病人</p>
-        <a id="info">請先在「負責病人」處選擇病人!!</a><br>
+        <p id="subtitle">About對象</p>
+        <a id="info">請先在「負責對象」處選擇對象!!</a><br>
         <br>
 
-        <p id="subtitle">About病床</p>
+        <p id="subtitle">About床位</p>
         <a id="info" href="nurse_bed_manage.php">床位管理</a>
       </div>
     </div>

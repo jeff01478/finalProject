@@ -85,7 +85,7 @@ try {
       <!-- Dropdown -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          病人資本資料
+          對象基本資料
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="patient_info.php">基本資料</a>
@@ -122,7 +122,7 @@ try {
       <tr>
         <th>藥物名稱</th>
         <th>日期時間</th>
-        <th>護理師</th>
+        <th>照服員</th>
         <th>備註</th>
       </tr>
       <?php

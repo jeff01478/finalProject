@@ -8,7 +8,7 @@ if ($_SESSION["login"] == 0) {
 <html lang="en">
 
 <head>
-    <title>病人端</title>
+    <title>負責對象首頁</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -82,7 +82,7 @@ if ($_SESSION["login"] == 0) {
       </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    病人資本資料
+                    對象基本資料
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="nurse_info.php">基本資料</a>

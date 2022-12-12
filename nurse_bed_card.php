@@ -3,7 +3,7 @@
     if ($_SESSION["login"] == 0) {
     echo "<script> {location.href='login.html'} </script>";
     }
-    if(isset($_GET['p_id_number'])){ //避免醫護端與病人端衝突，需做區分
+    if(isset($_GET['p_id_number'])){ //避免醫護端與病人端(照服員與家屬)衝突，需做區分
         $id_number = $_GET['p_id_number'];
     }
 
@@ -52,7 +52,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>病床卡</title>
+    <title>資訊病床卡</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script type='text/javascript' src='http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js'></script>
     <script type="text/javascript" src="http://cdn.staticfile.org/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
@@ -148,7 +148,7 @@
       </li>
       <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    病人資本資料
+                    家屬資本資料
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="nurse_info.php">基本資料</a>
@@ -180,13 +180,13 @@
 <p></p>
 <div style="position:relative; width: 1400px;0px; height: 830px; border:5px rgb(52, 183, 220) solid;padding: 20px; margin: 0 auto;">
         <div id="bed">房號:<?php echo $ward_no;?><br>床號：<?php echo $bed_no;?></div>
-        <div class="locate"><p1>旗山醫院</p1><p2><iframe href="#" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=small&timezone=Asia%2FTaipei" width="100%" height="90" frameborder="0" seamless></iframe> </p2></div>
-        <div style="margin: 20px;font-size: 30px; font-weight:bold;">病歷號：<?php echo $chart_no;?></div>
+        <div class="locate"><p1>旗山長照</p1><p2><iframe href="#" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=small&timezone=Asia%2FTaipei" width="100%" height="90" frameborder="0" seamless></iframe> </p2></div>
+        <div style="margin: 20px;font-size: 30px; font-weight:bold;">編號：<?php echo $chart_no;?></div>
         <div class="info1"><p1><?php echo $p_name?></p1><p2>性別：<?php echo $gender;?><br>年齡：80y2m<br>血型：<?php echo $blood;?></p2></div>
         <div class="info2">
-            主治醫師：<?php echo $physician;?><br>
-            主護護理師：<?php echo $nurse;?><br>
-            住院時間：<?php echo $date;?>
+            <!--主治醫師：<?php echo $physician;?><br>-->
+            主照服員：<?php echo $nurse;?><br>
+            入住時間：<?php echo $date;?>
         </div>
         <!-- QRcode產生 -->
         <div id="qrcode" style="float:right; position: absolute; bottom: 50px; right: 100px;">

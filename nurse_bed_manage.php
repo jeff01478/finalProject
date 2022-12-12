@@ -10,7 +10,7 @@
 <html lang="en">
 
 <head>
-    <title>病床管理</title>
+    <title>床位管理</title>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css">
@@ -108,7 +108,7 @@
 
     </nav>
 
-    <h1 class="container">病床介面</h1>
+    <h1 class="container">床位介面</h1>
     <div class="color_mean_container">
         <div class="color_mean">在床中</div>
         <div style="background-image: url(images/blue.png); width:60px; height: 60px; float:left;"></div>
@@ -116,7 +116,7 @@
         <div style="background-image: url(images/green.png); width: 60px; height: 60px; float:left;"></div>
     </div>
     <div class="color_mean_container">
-        <div class="color_mean">手術中</div>
+        <div class="color_mean">休息中</div>
         <div style="background-image: url(images/red.png); width: 60px; height: 60px; float:left;"></div>
         <div class="color_mean">空床中</div>
         <div style="background-image: url(images/white.png); border: 1px black solid; width:60px; height: 60px; float:left;"></div>
@@ -141,7 +141,7 @@
                             case "在床中":
                                 $color = "blue";
                                 break;
-                            case "看診中":
+                            case "休息中":
                                 $color = "green";
                                 break;
                             case "手術中":
