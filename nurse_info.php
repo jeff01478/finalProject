@@ -82,7 +82,7 @@ if ($_SESSION["login"] == 0) {
       </li>
             <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    對象基本資料
+                    病人基本資料
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="nurse_info.php">基本資料</a>
@@ -111,7 +111,7 @@ if ($_SESSION["login"] == 0) {
             <input class="btn btn-warning" type="submit" value="登出">
          </form>
     </nav>
-    <h1 style="margin: 10px 50px;">基本資料</h1>
+    <h1 style="margin: 10px 50px;">病人基本資料</h1>
     <div class="container">
         <div class="col-xs-14 col-md-14" style="margin:12px auto ;">
             <table id="info">
