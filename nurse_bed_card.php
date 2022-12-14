@@ -184,8 +184,8 @@
         <div style="margin: 20px;font-size: 30px; font-weight:bold;">編號：<?php echo $chart_no;?></div>
         <div class="info1"><p1><?php echo $p_name?></p1><p2>性別：<?php echo $gender;?><br>年齡：80y2m<br>血型：<?php echo $blood;?></p2></div>
         <div class="info2">
-            <!--主治醫師：<?php echo $physician;?><br>-->
-            主照服員：<?php echo $nurse;?><br>
+            主治醫師：<?php echo $physician;?><br>
+            主護理師：<?php echo $nurse;?><br>
             入住時間：<?php echo $date;?>
         </div>
         <!-- QRcode產生 -->

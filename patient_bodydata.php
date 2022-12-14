@@ -85,7 +85,7 @@
       <!-- Dropdown -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          對象基本資料
+          病人基本資料
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="patient_info.php">基本資料</a>
@@ -122,7 +122,7 @@
       <tr>
         <th>日期時間</th>
         <th>體溫</th>
-        <th>照服員</th>
+        <th>護理師</th>
         <th>備註</th>
       </tr>
       <?php
