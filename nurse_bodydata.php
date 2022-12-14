@@ -161,6 +161,7 @@ try {
                 document.getElementById(timeID.id).innerHTML =  y+"-"+m+"-"+d+" ("+ww+")"+"   "+h+":"+minute+":"+s;
                 //document.write(y+"-"+m+"-"+d+"   "+h+":"+minute+":"+s); 
                 document.getElementById('date').value = y+"-"+m+"-"+d+" ("+ww+")"+"   "+h+":"+minute+":"+s; 
+                document.getElementById('date2').value = y+"-"+m+"-"+d+" ("+ww+")"+"   "+h+":"+minute+":"+s;
               }
             </script>  
             </div>  </td>
@@ -174,45 +175,7 @@ try {
           <input type="submit" value="提交" style="float:right">
   </form>
           <form method="POST" action="nurse_bodydata4.php">
-            <script>  
-                //這裡程式碼多了幾行，但是不會延遲顯示，速度比較好，格式可以自定義，是理想的時間顯示
-                setInterval("fun(show_time)",1);
-                function fun(timeID){ 
-                  var date = new Date();  //建立物件  
-                  var y = date.getFullYear();     //獲取年份  
-                  var m =date.getMonth()+1;   //獲取月份  返回0-11  
-                  var d = date.getDate(); // 獲取日  
-                  var w = date.getDay();   //獲取星期幾  返回0-6   (0=星期天) 
-                  var ww = ' 星期'+'日一二三四五六'.charAt(new Date().getDay()) ;//星期幾
-                  var h = date.getHours();  //時
-                  var minute = date.getMinutes()  //分
-                  var s = date.getSeconds(); //秒
-                  if(m<10){
-                    m = "0"+m;
-                  }
-                  if(d<10){
-                    d = "0"+d;
-                  }
-                  if(h<10){
-                    h = "0"+h;
-                  }
-                  
-                  
-                  if(minute<10){
-                    minute = "0"+minute;
-                  }
-                  
-                  
-                  if(s<10){
-                    s = "0"+s;
-                  }
-                  
-                  document.getElementById(timeID.id).innerHTML =  y+"-"+m+"-"+d+" ("+ww+")"+"   "+h+":"+minute+":"+s;
-                  //document.write(y+"-"+m+"-"+d+"   "+h+":"+minute+":"+s); 
-                  document.getElementById('date2').value = y+"-"+m+"-"+d+" ("+ww+")"+"   "+h+":"+minute+":"+s; 
-                }
-              </script>
-            <input type="submit" value="硬體測量" style="float:right">
+            <input type="submit" value="體溫測量" style="float:right">
             <input id="date2" type="hidden" name="date" />
           </form>
     </div>

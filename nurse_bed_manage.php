@@ -141,10 +141,10 @@
                             case "在床中":
                                 $color = "blue";
                                 break;
-                            case "休息中":
+                            case "看診中":
                                 $color = "green";
                                 break;
-                            case "手術中":
+                            case "休息中":
                                 $color = "red";
                                 break;
                         }
@@ -181,7 +181,7 @@
                             case "看診中":
                                 $color = "green";
                                 break;
-                            case "手術中":
+                            case "休息中":
                                 $color = "red";
                                 break;
                         }
