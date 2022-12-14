@@ -127,25 +127,24 @@ if ($_SESSION["login"] == 0) {
                         基<br>本<br>資<br>料
                     </td>
                     <?php
-                    try {
-                        $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
-                        $stmt = $conn->prepare("SELECT * FROM patient_basic_info where id_number = '".$_SESSION['p_id_number']."'");
-                        $stmt->execute();
-                        $row = $stmt->fetch();
-                    } catch (PDOException $e) {
-                        echo "資料庫連結失敗! 錯誤訊息為 " . $e->getMessage();
-                    }
-                    $basic = array(
-                        "身分證字號<br>ID Number", "病歷號碼<br>Chart No.", "姓名<br>Name", "性別<gender>", "出生日期<br>Birth Date", "血型<br>Blood Type",
-                        "D抗原性<br>Rh Type", "重大傷病<br>Major illness", "過敏史<br>History of allergies"
-                    );
+                        try {
+                            $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
+                            $stmt = $conn->prepare("SELECT * FROM patient_basic_info where id_number = '".$_SESSION['p_id_number']."'");
+                            $stmt->execute();
+                            $row = $stmt->fetch();
+                        } catch (PDOException $e) {
+                            echo "資料庫連結失敗! 錯誤訊息為 " . $e->getMessage();
+                        }
+                        $basic = array(
+                            "身分證字號<br>ID Number", "病歷號碼<br>Chart No.", "姓名<br>Name", "性別<gender>", "出生日期<br>Birth Date", "血型<br>Blood Type",
+                            "D抗原性<br>Rh Type", "重大傷病<br>Major illness", "過敏史<br>History of allergies"
+                        );
 
-                    $j = 0;
-                    for ($i = 0; $i < count($basic) * 2; $i += 2) {
-                        echo "<td>" . $basic[$j] . "</td><td>" . $row[$i] . "</td><td>" . $row[$i + 1] . "</td></tr><tr>";
-                        $j += 1;
-                    }
-
+                        $j = 0;
+                        for ($i = 0; $i < count($basic) * 2; $i += 2) {
+                            echo "<td>" . $basic[$j] . "</td><td>" . $row[$i] . "</td><td>" . $row[$i + 1] . "</td></tr><tr>";
+                            $j += 1;
+                        }
                     ?>
             </table>
         </div>
