@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- 主機： 127.0.0.1
--- 產生時間： 2022-12-14 11:00:36
+-- 產生時間： 2022-12-15 16:21:22
 -- 伺服器版本： 10.4.20-MariaDB
 -- PHP 版本： 8.0.9
 
@@ -39,14 +39,14 @@ CREATE TABLE `bed_manage` (
 --
 
 INSERT INTO `bed_manage` (`id_number`, `bed_no`, `m_name`, `p_condition`) VALUES
-('', 2, '', '空床'),
-('D473890112', 7, '鍾秀楊', '休息中'),
+('', 6, '', '空床'),
+('D473890112', 4, '鍾秀楊', '休息中'),
 ('H382014573', 5, '黃勃融', '休息中'),
-('K341256782', 3, '蔡昀吅', '在床中'),
-('Q120987324', 4, '陳柏緊', '在床中'),
+('K341256782', 7, '蔡昀吅', '在床中'),
+('Q120987324', 1, '陳柏緊', '在床中'),
 ('R483909821', 8, '何輸瑋', '在床中'),
-('S123456789', 6, '周松諭', '看診中'),
-('W490382914', 1, '李政浩', '看診中');
+('S123456789', 2, '周松諭', '看診中'),
+('W490382914', 3, '李政浩', '看診中');
 
 -- --------------------------------------------------------
 
@@ -72,10 +72,9 @@ INSERT INTO `body_data` (`id_number`, `m_date`, `T`, `m_name`, `remark`) VALUES
 ('W490382914', '2022-12-14 ( 星期三)   17:05:05', 34, '李政浩', ''),
 ('W490382914', '2022-12-14 ( 星期三)   17:05:11', 36.7, '李政浩', ''),
 ('W490382914', '2022-12-14 ( 星期三)   17:05:16', 36.5, '李政浩', ''),
-('W490382914', '2022-12-14 ( 星期三)   17:05:22', 37.2, '李政浩', ''),
-('W490382914', '2022-12-14 ( 星期三)   17:23:28', 50, '李政浩', ''),
-('W490382914', '2022-12-14 ( 星期三)   17:23:33', 32, '李政浩', ''),
-('W490382914', '2022-12-14 ( 星期三)   17:23:38', 42, '李政浩', '');
+('W490382914', '2022-12-15 ( 星期四)   10:55:28', 35, '李政浩', '不錯'),
+('Q120987324', '2022-12-15 ( 星期四)   11:02:38', 36.4, '陳柏緊', '不錯'),
+('R483909821', '2022-12-15 ( 星期四)   23:20:07', 34, '何輸瑋', '');
 
 -- --------------------------------------------------------
 
@@ -128,6 +127,16 @@ CREATE TABLE `med_time` (
   `m_name` varchar(255) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- 傾印資料表的資料 `med_time`
+--
+
+INSERT INTO `med_time` (`id_number`, `med`, `m_date`, `m_name`, `remark`) VALUES
+('W490382914', 'FUROSELY TABLETS \"M.S.\"(高血壓)<br>SHIN TAN TABLETS \"SHOU CHAN\"(糖尿病)<br>', '2022-12-14 ( 星期三)   18:54:39', '李政浩', ''),
+('W490382914', 'FURSEDE TABLETS(高血壓)<br>SHIN TAN TABLETS \"SHOU CHAN\"(糖尿病)<br>', '2022-12-15 ( 星期四)   10:55:39', '李政浩', ''),
+('K341256782', 'FUROSELY TABLETS \"M.S.\"(高血壓)<br>SHIN TAN TABLETS \"SHOU CHAN\"(糖尿病)<br>', '2022-12-15 ( 星期四)   11:02:50', '蔡昀吅', ''),
+('R483909821', 'FUROSELY TABLETS \"M.S.\"(高血壓)<br>SHIN TAN TABLETS \"SHOU CHAN\"(糖尿病)<br>', '2022-12-15 ( 星期四)   23:19:56', '何輸瑋', '');
 
 -- --------------------------------------------------------
 
@@ -197,13 +206,13 @@ CREATE TABLE `patient_admission_info` (
 --
 
 INSERT INTO `patient_admission_info` (`id_number`, `ward_no`, `r1`, `bed_no`, `r2`, `phone_no`, `r3`, `address`, `r4`, `emergency_contact`, `r5`, `emergency_contact_no`, `r6`, `hospitalization_date`, `r7`, `observation_time`, `r8`, `attending_physician`, `r9`, `nurse`, `r10`, `current_condition`, `r11`, `transaction_info`) VALUES
-('D473890112', 712, NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('H382014573', 712, NULL, 5, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('K341256782', 712, NULL, 4, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('Q120987324', 712, NULL, 4, NULL, '0937482653', NULL, '台北市信義區中正路145號4樓之3', NULL, '家人', NULL, '0987346632', NULL, '2022/3/13', NULL, '500', NULL, '江修黼', NULL, '江明諺', NULL, 'not good', NULL, '無'),
-('R483909821', 712, NULL, 8, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('S123456789', 712, NULL, 6, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('W490382914', 712, '', 1, '', '0912567878', '', '新北市新店區安康路二段67號', '', '家人', '', '0912345123', '', '2022/1/19', '', '150', '', '江修黼', '', '徐溫詠', '', 'good', '', 'ewgdb');
+('D473890112', 712, '', 4, '', '0912384920', '', '新北市新店區安康路二段66號', '', '家人', '', '0921837491', '', '2020/03/16', '', '300', '', '江修黼', '', '徐溫詠', '', '', '', NULL),
+('H382014573', 712, '', 5, '', '0921374820', '', '新北市新店區安康路二段67號', '', '家人', '', '0934827319', '', '2022/04/05', '', '300', '', '江修黼', '', '江明諺', '', '', '', NULL),
+('K341256782', 712, '', 7, '', '0987234612', '', '新北市新店區安康路二段67號', '', '家人', '', '0923748129', '', '2020/4/5', '', '300', '', '江修黼', '', '江明諺', '', '', '', NULL),
+('Q120987324', 712, '', 1, '', '0937482653', '', '台北市信義區中正路145號4樓之3', '', '家人', '', '0987346632', '', '2022/3/13', '', '500', '', '江修黼', '', '江明諺', '', 'not good', '', '無'),
+('R483909821', 712, '', 8, '', '0923714829', '', '新北市新店區安康路二段69號', '', '家人', '', '0923871293', '', '2021/05/06', '', '300', '', '江修黼', '', '徐溫詠', '', '', '', NULL),
+('S123456789', 712, '', 2, '', '0912733941', '', '新北市新店區安康路二段70號', '', '家人', '', '0937284923', '', '2022/12/09', '', '400', '', '江修黼', '', '徐溫詠', '', '', '', NULL),
+('W490382914', 712, '', 3, '', '0912567889', '', '新北市新店區安康路二段67號', '', '家人', '', '0912345124', '', '2022/1/19', '', '150', '', '江修黼', '', '江明諺', '', 'good', '', 'ewgdb');
 
 -- --------------------------------------------------------
 
@@ -237,13 +246,13 @@ CREATE TABLE `patient_basic_info` (
 --
 
 INSERT INTO `patient_basic_info` (`id_number`, `r1`, `chart_no`, `r2`, `m_name`, `r3`, `gender`, `r4`, `birth_date`, `r5`, `blood`, `r6`, `rh`, `r7`, `major_illness`, `r8`, `allergies`, `r9`) VALUES
-('D473890112', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('H382014573', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('K341256782', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('Q120987324', NULL, '34562567', NULL, '陳柏緊', NULL, '女性', NULL, '1983/05/21', NULL, 'AB', NULL, 'RH+', NULL, '糖尿病', NULL, '無', NULL),
-('R483909821', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('S123456789', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-('W490382914', '身分證號、護照號碼或居留證號', '123456', NULL, '李政浩', NULL, '男性', NULL, '2001/08/13', '格式為西元YYYYMMDD', 'A', NULL, 'RH+', NULL, '無', NULL, '無', NULL);
+('D473890112', NULL, '325324233', NULL, '鍾秀楊', NULL, '男性', NULL, '2001/03/05', NULL, 'A', NULL, 'RH+', NULL, '無', NULL, '無', NULL),
+('H382014573', NULL, '362456142', NULL, '黃勃融', NULL, '男性', NULL, '2000/04/24', NULL, 'A', NULL, 'RH+', NULL, '無', NULL, '無', NULL),
+('K341256782', NULL, '098346273', NULL, '蔡昀吅', NULL, '女性', NULL, '2001/08/30', NULL, 'O', NULL, 'RH+', NULL, '無', NULL, '無', NULL),
+('Q120987324', NULL, '345625673', NULL, '陳柏緊', NULL, '女性', NULL, '1983/05/21', NULL, 'AB', NULL, 'RH+', NULL, '糖尿病', NULL, '無', NULL),
+('R483909821', NULL, '038572483', NULL, '何輸瑋', NULL, '男性', NULL, '2002/4/5', NULL, 'B', NULL, 'RH+', NULL, '無', NULL, '無', NULL),
+('S123456789', NULL, '049582738', NULL, '周松諭', NULL, '男性', NULL, '1999/12/3', NULL, 'AB', NULL, 'RH+', NULL, '無', NULL, '無', NULL),
+('W490382914', '身分證號、護照號碼或居留證號', '123456345', NULL, '李政浩', NULL, '男性', NULL, '2001/08/13', '格式為西元YYYYMMDD', 'A', NULL, 'RH+', NULL, '無', NULL, '無', NULL);
 
 -- --------------------------------------------------------
 
@@ -269,7 +278,7 @@ CREATE TABLE `responsible_nurse` (
 --
 
 INSERT INTO `responsible_nurse` (`id_number`, `m_name`, `p1`, `p2`, `p3`, `p4`, `p1_id_number`, `p2_id_number`, `p3_id_number`, `p4_id_number`) VALUES
-('F483901223', '徐溫詠', '李政浩', '周松諭', '鍾秀楊', NULL, 'R483909821', 'S123456789', 'D473890112', NULL),
+('F483901223', '徐溫詠', '何輸瑋', '周松諭', '鍾秀楊', NULL, 'R483909821', 'S123456789', 'D473890112', NULL),
 ('F485739200', '江明諺', '李政浩', '陳柏緊', '蔡昀吅', '黃勃融', 'W490382914', 'Q120987324', 'K341256782', 'H382014573');
 
 -- --------------------------------------------------------
@@ -285,6 +294,18 @@ CREATE TABLE `room_round_record` (
   `m_name` varchar(255) DEFAULT NULL,
   `remark` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- 傾印資料表的資料 `room_round_record`
+--
+
+INSERT INTO `room_round_record` (`id_number`, `m_date`, `content`, `m_name`, `remark`) VALUES
+('W490382914', '2022-12-14 ( 星期三)   18:54:51', '量血壓<br>換藥<br>', '李政浩', ''),
+('Q120987324', '2022-12-15 ( 星期四)   10:55:47', '換藥<br>', '陳柏緊', ''),
+('H382014573', '2022-12-15 ( 星期四)   11:02:59', '量血壓<br>量體溫<br>', '黃勃融', ''),
+('W490382914', '2022-12-15 ( 星期四)   13:37:31', '量血壓<br>量體溫<br>', '李政浩', ''),
+('W490382914', '2022-12-15 ( 星期四)   13:37:41', '量血壓<br>', '李政浩', '過高'),
+('S123456789', '2022-12-15 ( 星期四)   23:20:17', '換藥<br>', '周松諭', '');
 
 --
 -- 已傾印資料表的索引
