@@ -121,7 +121,7 @@
         <tr>
           <th style="width: 35%;">藥物名稱</th>
           <th style="width: 25%;">日期時間</th>
-          <th style="width: 15%;">照服員</th>
+          <th style="width: 15%;">護理師</th>
           <th style="width: 25%;">備註</th>
         </tr>
         <tr>

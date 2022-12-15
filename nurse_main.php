@@ -103,7 +103,7 @@
       </div>
       <div class="col-xs-12 col-md-4" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">
         <p id="subtitle">異動資訊</p>
-        <p id="info"><?php echo "" /*匯入資料庫異動資訊*/; ?> </p>
+        <p id="info"><?php echo $_SESSION['data_change_text']; /*匯入資料庫異動資訊*/; ?> </p>
         <p></p> <!-- 這邊需要資料庫 -->
       </div>
       <div class="col-xs-12 col-md-3" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">

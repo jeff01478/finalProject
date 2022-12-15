@@ -122,7 +122,7 @@
       <tr>
         <th style="width: 25%;">內容</th>
         <th style="width: 25%;">日期時間</th>
-        <th style="width: 25%;">照服員</th>
+        <th style="width: 25%;">護理師</th>
         <th style="width: 25%;">備註</th>
       </tr>
       <tr>
@@ -188,7 +188,7 @@
       <tr>
         <th style="width: 25%;">內容</th>
         <th style="width: 25%;">日期時間</th>
-        <th style="width: 25%;">照服員</th>
+        <th style="width: 25%;">護理師</th>
         <th style="width: 25%;">備註</th>
       </tr>
     </tr>

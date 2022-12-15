@@ -122,7 +122,7 @@ try {
       <tr>
         <th>藥物名稱</th>
         <th>日期時間</th>
-        <th>照服員</th>
+        <th>護理師</th>
         <th>備註</th>
       </tr>
       <?php

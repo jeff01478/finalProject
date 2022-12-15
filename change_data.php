@@ -27,6 +27,10 @@
         $stmt->execute();
         $Af_bed_id = $stmt->fetchAll()[0][0];
 
+        $stmt = $conn ->prepare("SELECT m_name FROM member WHERE id_number ='".$_SESSION['p_id_number']."'"); //原病患姓名
+        $stmt->execute();
+        $Bf_bed_name = $stmt->fetchAll()[0][0];
+
         if($Af_bed_id == NULL){ //若換過去的床位為空床，則只更新bed_manage的資料
             $stmt = $conn ->prepare("SELECT bed_no FROM bed_manage WHERE bed_no='".$updata[2]."'"); //將第二位病患床位取出
             $stmt->execute();
@@ -34,7 +38,7 @@
             echo $Af_bed_no;
             $stmt = $conn ->prepare("UPDATE bed_manage SET bed_no = '".$Bf_bed_no."' WHERE bed_no = '".$updata[2]."'");
             $stmt->execute();
-            $data_change_text = "床號".$Bf_bed_no."(原病患".$_SESSION['patient'].")更換至床號".$Af_bed_no."<br>"; //將異動資訊更新，並更新至資料庫
+            $data_change_text = "床號".$Bf_bed_no."(原病患".$Bf_bed_name.")更換至床號".$Af_bed_no."<br>"; //將異動資訊更新，並更新至資料庫
             $data_change_text .= $_SESSION['data_change_text'];
             $_SESSION['data_change_text'] = $data_change_text;
             $stmt = $conn ->prepare("UPDATE data_change_text SET record = '".$data_change_text."' WHERE id = 1");
@@ -54,7 +58,7 @@
             $stmt->execute();
             $Af_bed_name = $stmt->fetchAll()[0][0];
 
-            $data_change_text = "床號".$Bf_bed_no."(原病患".$_SESSION['patient'].")更換至床號".$Af_bed_no."，與病患".$Af_bed_name."交換<br>"; //將異動資訊更新，並更新至資料庫
+            $data_change_text = "床號".$Bf_bed_no."(原病患".$Bf_bed_name.")更換至床號".$Af_bed_no."，與病患".$Af_bed_name."交換<br>"; //將異動資訊更新，並更新至資料庫
             $data_change_text .= $_SESSION['data_change_text'];
             $_SESSION['data_change_text'] = $data_change_text;
             $stmt = $conn ->prepare("UPDATE data_change_text SET record = '".$data_change_text."' WHERE id = 1");

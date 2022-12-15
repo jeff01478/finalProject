@@ -119,7 +119,7 @@ try {
       <tr>
         <th style="width: 25%;">日期時間</th>
         <th style="width: 25%;">體溫</th>
-        <th style="width: 25%;">照服員</th>
+        <th style="width: 25%;">護理師</th>
         <th style="width: 25%;">備註</th>
       </tr>
       <tr>
@@ -186,7 +186,7 @@ try {
       <tr>
         <th style="width: 25%;">日期時間</th>
         <th style="width: 25%;">體溫</th>
-        <th style="width: 25%;">照服員</th>
+        <th style="width: 25%;">護理師</th>
         <th style="width: 25%;">備註</th>
       </tr>
     </tr>

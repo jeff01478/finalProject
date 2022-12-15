@@ -138,7 +138,7 @@
       <div class="col-xs-12 col-md-3" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">
         <p id="subtitle">About對象</p>
         <a id="info" href="patient_info.php">對象基本資料</a><br>
-        <a id="info" href="patient_bodydata.php">身體數據</a><br>
+        <a id="info" href="patient_bodydata2.php">身體數據</a><br>
         <a id="info" href="patient_med_time.php">用藥時間</a>
 
         <p id="subtitle">About床位</p>
