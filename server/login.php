@@ -26,7 +26,7 @@
 <?php
     //登入認證
     try {
-        $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
+        $conn = new PDO("mysql:host=localhost;dbname=id20011523_nursing", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
         $stmt = $conn ->prepare("SELECT * FROM member WHERE userid=? AND password=?");
         $stmt-> execute([  $_POST['account'], $_POST['password']  ]);
         $result =  $stmt->fetchAll();   

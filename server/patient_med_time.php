@@ -90,7 +90,7 @@ try {
         <div class="dropdown-menu">
           <a class="dropdown-item" href="patient_info.php">基本資料</a>
           <a class="dropdown-item" href="patient_bodydata.php">身體數據</a>
-                  <a class="dropdown-item" href="patient_bed_card.php">檢視病床卡</a>
+          <!-- <a class="dropdown-item" href="patient_bed_card.php">檢視病床卡</a> -->
         </div>
       </li>
       <li class="nav-item">

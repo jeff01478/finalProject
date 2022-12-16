@@ -114,7 +114,7 @@
         <a id="info" href="nurse_ward_round.php">查房時間</a>
 
         <p id="subtitle">About床位</p>
-        <a id="info" href="nurse_bed_card.php?p_id_number=<?php echo $_SESSION['p_id_number'];?>">病床卡管理</a><br>
+        <!-- <a id="info" href="nurse_bed_card.php?p_id_number=<?php echo $_SESSION['p_id_number'];?>">病床卡管理</a><br> -->
         <a id="info" href="nurse_bed_manage.php">床位管理</a>
       </div>
     </div>
