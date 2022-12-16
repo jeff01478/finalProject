@@ -88,7 +88,7 @@ if ($_SESSION["login"] == 0) {
         <p id="subtitle">負責對象</p>
         <?php
           try {
-            $conn = new PDO("mysql:host=localhost;dbname=id20011523_admin", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
+            $conn = new PDO("mysql:host=localhost;dbname=id20011523_nursing", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
             $stmt = $conn ->prepare("SELECT * FROM responsible_nurse WHERE id_number = '".$_SESSION['id_number']."'");
             $stmt->execute();
             $result = $stmt->fetchAll();

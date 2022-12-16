@@ -120,7 +120,7 @@
                     </td>
                     <?php
                         try {
-                            $conn = new PDO("mysql:host=localhost;dbname=id20011523_admin", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
+                            $conn = new PDO("mysql:host=localhost;dbname=id20011523_nursing", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
                             $stmt = $conn ->prepare("SELECT * FROM patient_basic_info where id_number='".$_SESSION['id_number']."'");
                             $stmt->execute();
                             $row = $stmt->fetch();

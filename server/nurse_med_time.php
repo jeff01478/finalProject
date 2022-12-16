@@ -1,7 +1,7 @@
 <?php
   session_start();
   try {
-    $conn = new PDO("mysql:host=localhost;dbname=id20011523_admin", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
+    $conn = new PDO("mysql:host=localhost;dbname=id20011523_nursing", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
     // $stmt = $conn->prepare("SELECT * FROM bodydata");
     // $stmt->execute();
     // $result = $stmt->fetchAll();

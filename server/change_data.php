@@ -9,7 +9,7 @@
 <body>
     <?php 
         session_start();
-        $conn = new PDO("mysql:host=localhost;dbname=id20011523_admin", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
+        $conn = new PDO("mysql:host=localhost;dbname=id20011523_nursing", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
         $updata = array();
         $data_amount = $_POST['data']; //資料數量
         $data_change_text = "";

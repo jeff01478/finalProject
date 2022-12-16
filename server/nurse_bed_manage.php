@@ -3,7 +3,7 @@
     if($_SESSION["login"] == 0){
         echo "<script> {location.href='login.html'} </script>";
     }
-    $conn = new PDO("mysql:host=localhost;dbname=id20011523_admin", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
+    $conn = new PDO("mysql:host=localhost;dbname=id20011523_nursing", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
 ?>
 
 <!DOCTYPE html>
