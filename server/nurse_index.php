@@ -1,17 +1,9 @@
 <?php
-  /*session_start();
-  if ($_SESSION["login"] == 0) {
-    echo "<script> {location.href='login.html'} </script>";
-  }*/
-  session_start();
-  $_SESSION['p_id_number'] = NULL;
-  if(isset($_GET['p_id_number'])){
-    $_SESSION['p_id_number'] = $_GET['p_id_number'];
-  }
-
+session_start();
+if ($_SESSION["login"] == 0) {
+  echo "<script> {location.href='login.html'} </script>";
+}
 ?>
-
-<!-- 還需要一個判斷是否有選擇病人，沒有的話要回到nurse_index.php -->
 
 <!DOCTYPE html>
 <html lang="en">
@@ -56,38 +48,21 @@
       <li class="nav-item">
         <a class="nav-link" href="nurse_bed_manage.php">床位管理</a>
       </li>
-      <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    病人基本資料
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="nurse_info.php">基本資料</a>
-                    <a class="dropdown-item" href="nurse_bodydata.php">身體數據</a>
-                </div>
-      </li>
-      <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-                    檢查日程
-                </a>
-                <div class="dropdown-menu">
-                    <a class="dropdown-item" href="nurse_med_time.php">用藥時間</a>
-                    <a class="dropdown-item" href="nurse_ward_round.php">查房時間</a>
-                </div>
-      </li>
+      <!--<li class="nav-item">
+        <a class="nav-link" href="calender.php">行事曆</a>
+      </li>-->
     </ul>
 
     <div style="margin-right:10px ;text-align:right; color:white;" class="col-xs-12 col-md-2">
-      <?php 
+      <?php
         $name = $_SESSION["name"];
         $identity = $_SESSION["identity"]; 
         echo "姓名：" . $name . "<br>身分別：" . $identity /*匯入資料庫姓名、身分別*/;
       ?>
     </div>
-
     <form  id="login" method="POST" action="logout.php">
       <input class="btn btn-warning" type="submit" value="登出">
     </form>
-    
   </nav>
 
   <h1 class="container">照護首頁</h1>
@@ -96,10 +71,38 @@
       <div class="col-xs-12 col-md-4" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">
         <p id="subtitle">照護基本資料</p>
 
-        <p id="info">身分別：<?php echo $identity /*匯入資料庫身分別*/; ?> </p>
+        <p id="info">身分別：
+          <?php
+            echo $identity; /*匯入資料庫身分別*/; 
+          ?> 
+        </p>
         <!-- 等你們改 -->
-        <p id="info">帳號：<?php echo $_SESSION['account'] /*匯入資料庫帳號*/; ?> </p>
+        <p id="info">帳號：
+          <?php 
+            $account = $_SESSION["account"];
+            echo $account; /*匯入資料庫帳號*/; 
+          ?> 
+        </p>
         <!-- 等你們改 -->
+
+        <p id="subtitle">負責對象</p>
+        <?php
+          try {
+            $conn = new PDO("mysql:host=localhost;dbname=id20011523_admin", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
+            $stmt = $conn ->prepare("SELECT * FROM responsible_nurse WHERE id_number = '".$_SESSION['id_number']."'");
+            $stmt->execute();
+            $result = $stmt->fetchAll();
+            echo '<a id="info" href="nurse_main.php?p_id_number='.$result[0]['p1_id_number'].'">'.$result[0]['p1'].'</a><br>
+                  <a id="info" href="nurse_main.php?p_id_number='.$result[0]['p2_id_number'].'">'.$result[0]['p2'].'</a><br>
+                  <a id="info" href="nurse_main.php?p_id_number='.$result[0]['p3_id_number'].'">'.$result[0]['p3'].'</a><br>
+                  <a id="info" href="nurse_main.php?p_id_number='.$result[0]['p4_id_number'].'">'.$result[0]['p4'].'</a><br>';
+          }catch(PDOException $e ){
+              echo "資料庫連結失敗! 錯誤訊息為 " . $e->getMessage();
+          }
+        ?>
+        
+        <!-- 從資料庫匯入負責的病人 -->
+
       </div>
       <div class="col-xs-12 col-md-4" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">
         <p id="subtitle">異動資訊</p>
@@ -108,13 +111,10 @@
       </div>
       <div class="col-xs-12 col-md-3" style="margin:12px auto ;border: 3px solid black;  border-radius: 20px;">
         <p id="subtitle">About對象</p>
-        <a id="info" href="nurse_info.php">病人基本資料</a><br>
-        <a id="info" href="nurse_bodydata.php">身體數據</a><br>
-        <a id="info" href="nurse_med_time.php">用藥時間</a><br>
-        <a id="info" href="nurse_ward_round.php">查房時間</a>
+        <a id="info">請先在「負責對象」處選擇對象!!</a><br>
+        <br>
 
         <p id="subtitle">About床位</p>
-        <a id="info" href="nurse_bed_card.php?p_id_number=<?php echo $_SESSION['p_id_number'];?>">病床卡管理</a><br>
         <a id="info" href="nurse_bed_manage.php">床位管理</a>
       </div>
     </div>

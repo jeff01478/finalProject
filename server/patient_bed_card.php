@@ -10,7 +10,7 @@
         $name = $_SESSION['name'];
     }
 
-    $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
+    $conn = new PDO("mysql:host=localhost;dbname=id20011523_admin", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
     $stmt = $conn ->prepare("SELECT ward_no FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
     $stmt-> execute();
     $ward_no = $stmt->fetchAll()[0][0]; //房號

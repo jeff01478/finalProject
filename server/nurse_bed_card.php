@@ -3,43 +3,44 @@
     if ($_SESSION["login"] == 0) {
     echo "<script> {location.href='login.html'} </script>";
     }
-    if(isset($_GET['patient'])){ //避免醫護端與病人端衝突，需做區分
-        $name = $_GET['patient'];
-    }
-    else{
-        $name = $_SESSION['name'];
+    if(isset($_GET['p_id_number'])){ //避免醫護端與病人端(照服員與家屬)衝突，需做區分
+        $id_number = $_GET['p_id_number'];
     }
 
-    $conn = new PDO("mysql:host=localhost;dbname=access_test", "root", "");
-    $stmt = $conn ->prepare("SELECT ward_no FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
+    $conn = new PDO("mysql:host=localhost;dbname=id20011523_admin", "id20011523_admin", "O&Zp}A5LWd%ARi/8");
+    $stmt = $conn ->prepare("SELECT ward_no FROM patient_admission_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $ward_no = $stmt->fetchAll()[0][0]; //房號
 
-    $stmt = $conn ->prepare("SELECT bed_no FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
+    $stmt = $conn ->prepare("SELECT bed_no FROM patient_admission_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $bed_no = $stmt->fetchAll()[0][0]; //床號
 
-    $stmt = $conn ->prepare("SELECT chart_no FROM patient_basic_info WHERE id_number='".$_SESSION['id_number']."'");
+    $stmt = $conn ->prepare("SELECT m_name FROM patient_basic_info WHERE id_number='".$id_number."'");
+    $stmt-> execute();
+    $p_name = $stmt->fetchAll()[0][0]; //病患姓名
+
+    $stmt = $conn ->prepare("SELECT chart_no FROM patient_basic_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $chart_no = $stmt->fetchAll()[0][0]; //病例號
 
-    $stmt = $conn ->prepare("SELECT gender FROM patient_basic_info WHERE id_number='".$_SESSION['id_number']."'");
+    $stmt = $conn ->prepare("SELECT gender FROM patient_basic_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $gender = $stmt->fetchAll()[0][0]; //性別
 
-    $stmt = $conn ->prepare("SELECT blood FROM patient_basic_info WHERE id_number='".$_SESSION['id_number']."'");
+    $stmt = $conn ->prepare("SELECT blood FROM patient_basic_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $blood = $stmt->fetchAll()[0][0]; //血型
 
-    $stmt = $conn ->prepare("SELECT attending_physician FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
+    $stmt = $conn ->prepare("SELECT attending_physician FROM patient_admission_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $physician = $stmt->fetchAll()[0][0]; //醫師
 
-    $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
+    $stmt = $conn ->prepare("SELECT nurse FROM patient_admission_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $nurse = $stmt->fetchAll()[0][0]; //護理師
 
-    $stmt = $conn ->prepare("SELECT hospitalization_date FROM patient_admission_info WHERE id_number='".$_SESSION['id_number']."'");
+    $stmt = $conn ->prepare("SELECT hospitalization_date FROM patient_admission_info WHERE id_number='".$id_number."'");
     $stmt-> execute();
     $date = $stmt->fetchAll()[0][0]; //入院時間
     
@@ -51,7 +52,7 @@
 <head>
     <meta charset='utf-8'>
     <meta http-equiv='X-UA-Compatible' content='IE=edge'>
-    <title>病床卡</title>
+    <title>資訊病床卡</title>
     <meta name='viewport' content='width=device-width, initial-scale=1'>
     <script type='text/javascript' src='http://cdn.staticfile.org/jquery/2.1.1/jquery.min.js'></script>
     <script type="text/javascript" src="http://cdn.staticfile.org/jquery.qrcode/1.0/jquery.qrcode.min.js"></script>
@@ -130,57 +131,58 @@
 </head>
 
 <body>
-<nav class="navbar navbar-expand-sm bg-dark navbar-dark static-top" style="margin-bottom: 30px;">
-
-    <!-- Brand/logo -->
-    <a class="navbar-brand" href="patient_main.php">
-      <img src="./images/topic.png" alt="logo" style="width:250px;">
-    </a>
-
-    <!-- Links -->
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" href="patient_main.php">首頁</a>
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark static-top">
+  
+  <!-- Brand/logo -->
+  <a class="navbar-brand" href="nurse_index.php">
+    <img src="./images/topic.png" alt="logo" style="width:250px;">
+  </a>
+  
+  <!-- Links -->
+  <ul class="navbar-nav mr-auto">
+  <li class="nav-item">
+        <a class="nav-link" href="nurse_index.php">首頁</a>
       </li>
-
-      <!-- Dropdown -->
+      <li class="nav-item">
+        <a class="nav-link" href="nurse_bed_manage.php">床位管理</a>
+      </li>
       <li class="nav-item dropdown">
-        <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          病患基本資料
-        </a>
-        <div class="dropdown-menu">
-          <a class="dropdown-item" href="patient_info.php">基本資料</a>
-          <a class="dropdown-item" href="#">身體數據</a>
-          <a class="dropdown-item" href="patient_bed_card.php">檢視病床卡</a>
-        </div>
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    病患基本資料
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="nurse_info.php">基本資料</a>
+                    <a class="dropdown-item" href="nurse_bodydata.php">身體數據</a>
+                    </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="patient_med_time.php">用藥時間</a>
-        
+      <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    檢查日程
+                </a>
+                <div class="dropdown-menu">
+                    <a class="dropdown-item" href="nurse_med_time.php">用藥時間</a>
+                    <a class="dropdown-item" href="nurse_ward_round.php">查房時間</a>
+                </div>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" href="patient_health_education.php">衛教資訊</a>
-      </li>
-    </ul>
+</ul>
 
-    <div style="margin-right:10px ;text-align:right; color:white;" class="col-xs-12 col-md-2">
-      <?php 
+<div style="margin-right:10px ;text-align:right; color:white;" class="col-xs-12 col-md-2">
+      <?php $a = 1;
         $name = $_SESSION["name"];
         $identity = $_SESSION["identity"]; 
         echo "姓名：" . $name . "<br>身分別：" . $identity /*匯入資料庫姓名、身分別*/;
       ?>
     </div>
-
     <form  id="login" method="POST" action="logout.php">
       <input class="btn btn-warning" type="submit" value="登出">
     </form>
-  </nav>
+</nav>
 <p></p>
 <div style="position:relative; width: 1400px;0px; height: 830px; border:5px rgb(52, 183, 220) solid;padding: 20px; margin: 0 auto;">
         <div id="bed">房號:<?php echo $ward_no;?><br>床號：<?php echo $bed_no;?></div>
         <div class="locate"><p1>護理長照</p1><p2><iframe href="#" src="https://www.zeitverschiebung.net/clock-widget-iframe-v2?language=en&size=small&timezone=Asia%2FTaipei" width="100%" height="90" frameborder="0" seamless></iframe> </p2></div>
         <div style="margin: 20px;font-size: 30px; font-weight:bold;">病例號：<?php echo $chart_no;?></div>
-        <div class="info1"><p1><?php echo $name?></p1><p2>性別：<?php echo $gender;?><br>年齡：80y2m<br>血型：<?php echo $blood;?></p2></div>
+        <div class="info1"><p1><?php echo $p_name?></p1><p2>性別：<?php echo $gender;?><br>年齡：80y2m<br>血型：<?php echo $blood;?></p2></div>
         <div class="info2">
             主治醫師：<?php echo $physician;?><br>
             主護理師：<?php echo $nurse;?><br>
