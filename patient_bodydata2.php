@@ -86,7 +86,7 @@
       <!-- Dropdown -->
       <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-          病人資本資料
+          病人基本資料
         </a>
         <div class="dropdown-menu">
           <a class="dropdown-item" href="patient_info.php">基本資料</a>

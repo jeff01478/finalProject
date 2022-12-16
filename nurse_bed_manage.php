@@ -110,7 +110,7 @@
 
     <h1 class="container">床位介面</h1>
     <div class="color_mean_container">
-        <div class="color_mean">在床中</div>
+        <div class="color_mean">活動中</div>
         <div style="background-image: url(images/blue.png); width:60px; height: 60px; float:left;"></div>
         <div class="color_mean">看診中</div>
         <div style="background-image: url(images/green.png); width: 60px; height: 60px; float:left;"></div>
@@ -138,7 +138,7 @@
                             case "空床":
                                 $color = "white";
                                 break;
-                            case "在床中":
+                            case "活動中":
                                 $color = "blue";
                                 break;
                             case "看診中":
