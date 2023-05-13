@@ -148,11 +148,7 @@
       </li>
       <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
-<<<<<<< HEAD
-                    病人基本資料
-=======
                     病患基本資料
->>>>>>> 3080c8182892f91e1d75f7ab0d94cf0ec4466c2c
                 </a>
                 <div class="dropdown-menu">
                     <a class="dropdown-item" href="nurse_info.php">基本資料</a>
