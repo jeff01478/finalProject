@@ -155,18 +155,13 @@
             }
             if(h<10){
             h = "0"+h;
-            }
-            
-            
+            }                        
             if(minute<10){
             minute = "0"+minute;
-            }
-            
-            
+            }                        
             if(s<10){
             s = "0"+s;
-            }
-            
+            }        
             document.getElementById(timeID.id).innerHTML =  y+"-"+m+"-"+d+" ("+ww+")"+"   "+h+":"+minute+":"+s;
             //document.write(y+"-"+m+"-"+d+"   "+h+":"+minute+":"+s); 
             document.getElementById('date').value = y+"-"+m+"-"+d+" ("+ww+")"+"   "+h+":"+minute+":"+s; 
