@@ -1,0 +1,541 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="min-h-screen bg-gray-100 dark:bg-gray-900 flex transition-colors duration-200">
+    <!-- Sidebar -->
+    <div
+        class="bg-gray-800 dark:bg-gray-950 text-white w-64 space-y-6 py-7 px-2 absolute inset-y-0 left-0 transform -translate-x-full md:relative md:translate-x-0 transition duration-200 ease-in-out z-20">
+        <div class="text-white flex items-center justify-between px-4">
+            <span class="text-2xl font-extrabold">Nurse Portal</span>
+        </div>
+        <nav>
+            <a href="#"
+                class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 bg-gray-700 dark:bg-gray-800 text-white">
+                Dashboard
+            </a>
+            <a href="/nurse/beds"
+                class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
+                Bed Management
+            </a>
+            <a href="/logout"
+                class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 hover:text-white">
+                Logout
+            </a>
+            {% if user.permission == '0' %}
+            <div class="border-t border-gray-700 my-2"></div>
+            <a href="/admin/users"
+                class="block py-2.5 px-4 rounded transition duration-200 hover:bg-gray-700 text-yellow-300 font-bold">
+                ⚙ Admin Panel
+            </a>
+            {% endif %}
+        </nav>
+    </div>
+
+    <!-- Content -->
+    <div class="flex-1 p-10 overflow-y-auto">
+        <div class="flex justify-between items-center mb-6">
+            <h1 class="text-3xl font-bold text-gray-800 dark:text-white">Dashboard</h1>
+            <div class="flex items-center space-x-4">
+                <button onclick="toggleDarkMode()"
+                    class="p-2 rounded-full hover:bg-gray-200 dark:hover:bg-gray-700 transition-colors">
+                    <!-- Moon -->
+                    <svg class="w-6 h-6 text-gray-800 dark:text-yellow-300 block dark:hidden" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M20.354 15.354A9 9 0 018.646 3.646 9.003 9.003 0 0012 21a9.003 9.003 0 008.354-5.646z">
+                        </path>
+                    </svg>
+                    <!-- Sun -->
+                    <svg class="w-6 h-6 text-gray-800 dark:text-yellow-300 hidden dark:block" fill="none"
+                        stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z">
+                        </path>
+                    </svg>
+                </button>
+                <span class="font-medium text-gray-700 dark:text-gray-200">{{ user.name }} ({{ user.identity }})</span>
+            </div>
+        </div>
+
+        {% if patients_data %}
+        <div class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow mb-8 transition-colors duration-200">
+            <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Assigned Patients</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                {% for p in patients_data %}
+                <div class="block p-4 rounded-xl border-2 text-center transform transition duration-200 hover:scale-105 hover:shadow-md group relative
+                    {% if p.is_fever %}
+                        bg-red-50 dark:bg-red-900/20 border-red-500 animate-pulse
+                    {% else %}
+                        bg-blue-50 dark:bg-blue-900/20 border-blue-200 dark:border-blue-700 hover:bg-blue-100 dark:hover:bg-blue-800/30
+                    {% endif %}">
+
+                    {% if p.is_fever %}
+                    <div class="absolute top-2 right-2 text-red-600 dark:text-red-400">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+                        </svg>
+                    </div>
+                    {% endif %}
+
+                    <div
+                        class="mb-2 {% if p.is_fever %}text-red-500{% else %}text-blue-500 dark:text-blue-400{% endif %}">
+                        <svg class="w-8 h-8 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
+                        </svg>
+                    </div>
+                    <span class="font-bold text-gray-700 dark:text-gray-200 block">{{ p.name }}</span>
+
+                    <div class="mt-2 text-sm space-y-1">
+                        <span
+                            class="{% if p.is_fever %}text-red-600 dark:text-red-400 font-bold{% else %}text-gray-500 dark:text-gray-400{% endif %} block">
+                            Temp: {{ p.temp }}°C
+                        </span>
+                        <div class="flex justify-between text-gray-500 dark:text-gray-400 text-xs">
+                            <span>HR: <span class="font-medium text-gray-700 dark:text-gray-200">{{ p.pulse
+                                    }}</span></span>
+                            <span>BP: <span class="font-medium text-gray-700 dark:text-gray-200">{{ p.bp
+                                    }}</span></span>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 flex justify-center space-x-2">
+                        <button onclick="openVitalsModal('{{ p.name }}')"
+                            class="text-xs bg-indigo-500 hover:bg-indigo-600 text-white py-1.5 px-3 rounded-full transition duration-200">
+                            + Record
+                        </button>
+                        <button onclick="openHistoryModal('{{ p.name }}')"
+                            class="text-xs bg-gray-500 hover:bg-gray-600 text-white py-1.5 px-3 rounded-full transition duration-200">
+                            Trends
+                        </button>
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
+            <!-- Bed Status Table (Left 2/3) -->
+            <div class="lg:col-span-2 bg-white dark:bg-gray-800 p-6 rounded-lg shadow transition-colors duration-200">
+                <h2 class="text-xl font-semibold mb-4 text-gray-800 dark:text-white">Bed Status</h2>
+                <div class="overflow-x-auto">
+                    <table class="min-w-full divide-y divide-gray-200 dark:divide-gray-700">
+                        <thead class="bg-gray-50 dark:bg-gray-700">
+                            <tr>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Bed No</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Patient</th>
+                                <th
+                                    class="px-6 py-3 text-left text-xs font-medium text-gray-500 dark:text-gray-300 uppercase tracking-wider">
+                                    Condition</th>
+                            </tr>
+                        </thead>
+                        <tbody class="bg-white dark:bg-gray-800 divide-y divide-gray-200 dark:divide-gray-700">
+                            {% for bed in beds %}
+                            <tr>
+                                <td class="px-6 py-4 whitespace-nowrap text-gray-900 dark:text-gray-200">{{ bed.bed_no
+                                    }}</td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    {% if bed.name %}
+                                    <span class="text-gray-900 dark:text-gray-200">{{ bed.name }}</span>
+                                    {% else %}
+                                    <span class="text-gray-400 dark:text-gray-500">Empty</span>
+                                    {% endif %}
+                                </td>
+                                <td class="px-6 py-4 whitespace-nowrap">
+                                    <span
+                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full 
+                                    {% if bed.p_condition == '空床' %}bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300
+                                    {% elif bed.p_condition == '手術中' %}bg-red-100 text-red-800 dark:bg-red-900/30 dark:text-red-300
+                                    {% else %}bg-yellow-100 text-yellow-800 dark:bg-yellow-900/30 dark:text-yellow-300{% endif %}">
+                                        {{ bed.p_condition }}
+                                    </span>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Shift Notes (Right 1/3) -->
+            <div
+                class="bg-white dark:bg-gray-800 p-6 rounded-lg shadow flex flex-col h-full transition-colors duration-200">
+                <h2 class="text-xl font-semibold mb-4 flex items-center text-gray-800 dark:text-white">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                        </path>
+                    </svg>
+                    Shift Notes
+                </h2>
+                <div class="flex-1 overflow-y-auto mb-4 space-y-3 max-h-64 custom-scrollbar">
+                    {% if shift_notes %}
+                    {% for note in shift_notes %}
+                    <div
+                        class="bg-yellow-50 dark:bg-yellow-900/10 p-3 rounded-md border border-yellow-200 dark:border-yellow-700 text-sm">
+                        <p class="text-gray-800 dark:text-gray-200 break-words" id="note-content-{{ note.id }}">{{
+                            note.content }}</p>
+                        <div class="mt-1 flex justify-between text-xs text-gray-500 dark:text-gray-400">
+                            <span>{{ note.author.name }}</span>
+                            <div class="flex items-center space-x-2">
+                                <span>{{ note.created_at }}</span>
+                                {% if note.author_id == user.id_number %}
+                                <button onclick="openEditNoteModal({{ note.id }})"
+                                    class="text-blue-600 hover:text-blue-800 dark:text-blue-400 dark:hover:text-blue-300">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z">
+                                        </path>
+                                    </svg>
+                                </button>
+                                <button onclick="deleteNote({{ note.id }})"
+                                    class="text-red-600 hover:text-red-800 dark:text-red-400 dark:hover:text-red-300">
+                                    <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                            d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16">
+                                        </path>
+                                    </svg>
+                                </button>
+                                {% endif %}
+                            </div>
+                        </div>
+                    </div>
+                    {% endfor %}
+                    {% else %}
+                    <p class="text-gray-400 dark:text-gray-500 text-center text-sm py-4">No notes yet.</p>
+                    {% endif %}
+                </div>
+                <form onsubmit="postNote(event)" class="mt-auto">
+                    <div class="flex space-x-2">
+                        <input type="text" name="content" required placeholder="Add a note..." autocomplete="off"
+                            class="flex-1 min-w-0 block w-full px-3 py-2 rounded-md border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white shadow-sm focus:border-indigo-500 focus:ring-indigo-500 sm:text-sm border">
+                        <button type="submit"
+                            class="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                            Post
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Vitals Modal -->
+<div id="vitalsModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+    <div
+        class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white dark:bg-gray-800 transition-colors duration-200">
+        <div class="mt-3 text-center">
+            <h3 class="text-lg leading-6 font-medium text-gray-900 dark:text-white">Record Vitals</h3>
+            <form id="vitalsForm" class="mt-2 text-left" action="/nurse/patient/vitals" method="POST">
+                <div class="mt-2">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Patient Name</label>
+                    <input type="text" id="vitals_name" name="name" readonly
+                        class="mt-1 block w-full px-3 py-2 bg-gray-100 dark:bg-gray-700 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm focus:outline-none sm:text-sm dark:text-gray-100">
+                </div>
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Temperature (°C)</label>
+                    <input type="number" step="0.1" name="temperature" required
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Pulse (bpm)</label>
+                        <input type="number" name="pulse"
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">BP (Sys/Dia)</label>
+                        <div class="flex space-x-2">
+                            <input type="number" name="bp_sys" placeholder="Sys"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <input type="number" name="bp_dia" placeholder="Dia"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+                    </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 mt-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Pulse (bpm)</label>
+                        <input type="number" name="pulse"
+                            class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                    </div>
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">BP
+                            (Systolic/Diastolic)</label>
+                        <div class="flex space-x-2">
+                            <input type="number" name="bp_sys" placeholder="Sys"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                            <input type="number" name="bp_dia" placeholder="Dia"
+                                class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                        </div>
+                    </div>
+                </div>
+                <div class="mt-4">
+                    <label class="block text-sm font-medium text-gray-700 dark:text-gray-300">Remark (Optional)</label>
+                    <input type="text" name="remark"
+                        class="mt-1 block w-full px-3 py-2 border border-gray-300 dark:border-gray-600 dark:bg-gray-700 dark:text-white rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm">
+                </div>
+                <div class="mt-6 flex justify-end space-x-3">
+                    <button type="button" onclick="closeVitalsModal()"
+                        class="bg-white dark:bg-gray-700 py-2 px-4 border border-gray-300 dark:border-gray-600 rounded-md shadow-sm text-sm font-medium text-gray-700 dark:text-gray-200 hover:bg-gray-50 dark:hover:bg-gray-600 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Cancel
+                    </button>
+                    <button type="submit"
+                        class="bg-indigo-600 py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                        Save
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- History Modal -->
+<div id="historyModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+    <div
+        class="relative top-20 mx-auto p-5 border w-11/12 md:w-3/4 lg:w-1/2 shadow-lg rounded-md bg-white dark:bg-gray-800 transition-colors duration-200">
+        <div class="flex justify-between items-center mb-4">
+            <h3 class="text-xl leading-6 font-medium text-gray-900 dark:text-white" id="historyModalTitle">Patient
+                History</h3>
+            <button onclick="closeHistoryModal()"
+                class="text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+        </div>
+        <div class="h-64 sm:h-80 w-full">
+            <canvas id="tempChart"></canvas>
+        </div>
+        <div class="mt-4 flex justify-end">
+            <a id="exportBtn" href="#" target="_blank"
+                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded shadow transition duration-200 text-sm">
+                Download CSV
+            </a>
+        </div>
+    </div>
+</div>
+
+<!-- Note Edit Modal -->
+<div id="noteEditModal" class="fixed inset-0 bg-gray-600 bg-opacity-50 hidden overflow-y-auto h-full w-full z-50">
+    <div class="relative top-20 mx-auto p-5 border w-96 shadow-lg rounded-md bg-white dark:bg-gray-800">
+        <h3 class="text-lg font-medium text-gray-900 dark:text-white">Edit Note</h3>
+        <input type="hidden" id="editNoteId">
+        <textarea id="editNoteContent" rows="4"
+            class="mt-2 w-full p-2 border rounded dark:bg-gray-700 dark:text-white dark:border-gray-600"></textarea>
+        <div class="mt-4 flex justify-end space-x-2">
+            <button onclick="document.getElementById('noteEditModal').classList.add('hidden')"
+                class="px-4 py-2 bg-gray-200 rounded dark:bg-gray-600 dark:text-white">Cancel</button>
+            <button onclick="submitEditNote()" class="px-4 py-2 bg-indigo-600 text-white rounded">Update</button>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openVitalsModal(name) {
+        document.getElementById('vitals_name').value = name;
+        document.getElementById('vitalsModal').classList.remove('hidden');
+    }
+
+    function closeVitalsModal() {
+        document.getElementById('vitalsModal').classList.add('hidden');
+    }
+
+    let myChart = null;
+
+    async function openHistoryModal(name) {
+        document.getElementById('historyModalTitle').innerText = name + "'s Temperature Trend";
+        document.getElementById('exportBtn').href = `/nurse/patient/${name}/export`;
+        document.getElementById('historyModal').classList.remove('hidden');
+
+        try {
+            // Fetch data
+            const response = await fetch(`/nurse/patient/${name}/history`);
+            if (!response.ok) throw new Error("Failed to fetch history");
+
+            const data = await response.json();
+
+            const labels = data.map(d => d.date);
+            const temps = data.map(d => d.temp);
+            // Default to 0 or null if not present, but 0 might be confusing. Let's use null.
+            const pulses = data.map(d => d.pulse || null);
+
+            const canvas = document.getElementById('tempChart');
+            if (!canvas) {
+                showToast("Chart canvas not found API error", "error");
+                return;
+            }
+            const ctx = canvas.getContext('2d');
+
+            if (myChart) {
+                myChart.destroy();
+            }
+
+            if (typeof Chart === 'undefined') {
+                showToast("Chart.js library not loaded", "error");
+                return;
+            }
+
+            myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Temperature (°C)',
+                            data: temps,
+                            borderColor: 'rgb(239, 68, 68)', // Red for temp
+                            backgroundColor: 'rgba(239, 68, 68, 0.1)',
+                            borderWidth: 2,
+                            yAxisID: 'y',
+                            tension: 0.1
+                        },
+                        {
+                            label: 'Pulse (bpm)',
+                            data: pulses,
+                            borderColor: 'rgb(59, 130, 246)', // Blue for pulse
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            borderWidth: 2,
+                            yAxisID: 'y1',
+                            tension: 0.1
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    interaction: {
+                        mode: 'index',
+                        intersect: false,
+                    },
+                    scales: {
+                        y: {
+                            type: 'linear',
+                            display: true,
+                            position: 'left',
+                            title: { display: true, text: 'Temperature (°C)' },
+                            grid: {
+                                color: document.documentElement.classList.contains('dark') ? '#374151' : '#e5e7eb'
+                            },
+                            ticks: { color: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280' }
+                        },
+                        y1: {
+                            type: 'linear',
+                            display: true,
+                            position: 'right',
+                            title: { display: true, text: 'Pulse (bpm)' },
+                            grid: {
+                                drawOnChartArea: false, // only want the grid lines for one axis to show up
+                            },
+                            ticks: { color: document.documentElement.classList.contains('dark') ? '#9ca3af' : '#6b7280' }
+                        },
+                        x: {
+                            display: false
+                        }
+                    },
+                    plugins: {
+                        legend: {
+                            labels: { color: document.documentElement.classList.contains('dark') ? '#d1d5db' : '#374151' }
+                        }
+                    }
+                }
+            });
+        } catch (e) {
+            console.error(e);
+            showToast("Error loading trends: " + e.message, "error");
+        }
+    }
+
+    function closeHistoryModal() {
+        document.getElementById('historyModal').classList.add('hidden');
+    }
+
+    // Note Actions
+    async function deleteNote(id) {
+        if (!confirm("Delete this note?")) return;
+        try {
+            const res = await fetch(`/nurse/notes/${id}`, { method: 'DELETE' });
+            if (res.ok) {
+                showToast("Note deleted", "success");
+                // Wait for websocket or reload
+            } else {
+                showToast("Failed to delete note", "error");
+            }
+        } catch (e) {
+            showToast("Error deleting note", "error");
+        }
+    }
+
+    function openEditNoteModal(id) {
+        const content = document.getElementById(`note-content-${id}`).innerText;
+        document.getElementById('editNoteId').value = id;
+        document.getElementById('editNoteContent').value = content;
+        document.getElementById('noteEditModal').classList.remove('hidden');
+    }
+
+    async function submitEditNote() {
+        const id = document.getElementById('editNoteId').value;
+        const content = document.getElementById('editNoteContent').value;
+        const formData = new FormData();
+        formData.append('content', content);
+
+        try {
+            const res = await fetch(`/nurse/notes/${id}`, { method: 'PUT', body: formData });
+            if (res.ok) {
+                showToast("Note updated", "success");
+                document.getElementById('noteEditModal').classList.add('hidden');
+            } else {
+                showToast("Update failed", "error");
+            }
+        } catch (e) {
+            showToast("Error updating note", "error");
+        }
+    }
+
+    async function postNote(event) {
+        event.preventDefault();
+        const form = event.target;
+        const formData = new FormData(form);
+
+        try {
+            const response = await fetch('/nurse/notes', {
+                method: 'POST',
+                body: formData
+            });
+
+            if (response.ok || response.redirected) {
+                showToast('Note posted successfully', 'success');
+                form.reset();
+            } else {
+                showToast('Failed to post note', 'error');
+            }
+        } catch (error) {
+            showToast('Error posting note', 'error');
+        }
+    }
+
+    var clientId = Date.now();
+    var ws = new WebSocket("ws://" + window.location.host + "/ws/" + clientId);
+    ws.onmessage = function (event) {
+        console.log("Dashboard update received");
+        showToast('Dashboard updated', 'info');
+        setTimeout(() => location.reload(), 1000);
+    };
+
+    // Check for high fever alerts on load
+    document.addEventListener('DOMContentLoaded', () => {
+        const feverPatients = document.querySelectorAll('.animate-pulse');
+        if (feverPatients.length > 0) {
+            showToast(`Warning: ${feverPatients.length} patient(s) have high fever!`, 'warning');
+        }
+    });
+</script>
+{% endblock %}
