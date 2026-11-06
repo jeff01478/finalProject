@@ -1,0 +1,13 @@
+# Dependencies
+node_modules/
+
+# Build output
+dist/
+
+# Local SQLite database & WAL files (auto-generated and seeded on startup)
+data/
+
+# Logs & OS files
+*.log
+.DS_Store
+Thumbs.db
